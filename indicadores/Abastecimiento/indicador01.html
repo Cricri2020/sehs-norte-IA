@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/pg-style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Porcentaje de ventas</title>
+  </head>
+  <body>
+    <!--Titulo-->
+    <h1 class="title">Porcentaje de demanda de ventas por año 2016 - 2023</h1>
+
+    <!--Graficos-->
+    <div class="contenido">
+      <div class="grafico">
+        <h4>Valores Reales vs Predicciones de Ensemble</h4>
+        <canvas id="dispersionChart"></canvas>
+      </div>
+      <div class="grafico">
+        <h4>Predicciones de Ensemble Stacking vs Valores Reales</h4>
+        <canvas id="prediccionesVsRealesChart"></canvas>
+      </div>
+      <div class="grafico">
+        <h4>Predicción del Costo Total de Abastecimiento Anual</h4>
+        <canvas id="prediccionesFuturasChart"></canvas>
+      </div>
+      <div class="grafico">
+        <h4>Comparación de Predicciones vs Valores Reales por Año</h4>
+        <canvas id="comparacionPrediccionesChart"></canvas>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.title{
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    width: 80%;
+}
+
+.contenido{
+    width: 80%;
+    margin: auto;
+    margin-top: 5vh;
+}
+
+.grafico{
+    margin: 10vh auto;
+    padding: 5vh;
+    border-radius: 12px;
+    background: #F8F9FC;
+    box-shadow:  6px 6px 17px #d3d4d6,
+                -6px -6px 17px #ffffff;
+}
+
