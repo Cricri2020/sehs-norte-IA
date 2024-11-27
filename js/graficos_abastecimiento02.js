@@ -6,7 +6,7 @@ function cargarAbastecimiento02(url) {
 
 function inicializarGraficos() {
   // Generar gráfico general
-  fetch("/json/abastecimiento02/grafico_general.json")
+  fetch("json/abastecimiento02/grafico_general.json")
     .then((response) => response.json())
     .then((data) => {
       const categorias = data.map((d) => d["Categoría"]);
@@ -48,7 +48,7 @@ function inicializarGraficos() {
     );
 
   // Generar gráficos individuales por categoría
-  fetch("/json/abastecimiento02/graficos_individuales.json")
+  fetch("json/abastecimiento02/graficos_individuales.json")
     .then((response) => response.json())
     .then((data) => {
         const container = document.getElementById("graficosIndividuales");
@@ -129,7 +129,7 @@ const graficosContainer = document.getElementById("graficosContainer");
 
 // Función para cargar los datos JSON y graficar
 categorias.forEach((categoria) => {
-    const filePath = `/json/abastecimiento02/json_data/${categoria}.json`; 
+    const filePath = `json/abastecimiento02/json_data/${categoria}.json`; 
 
     fetch(filePath)
         .then((response) => response.json())
@@ -182,6 +182,5 @@ categorias.forEach((categoria) => {
         })
         .catch((error) => console.error(`Error al cargar el JSON de ${categoria}:`, error));
 });
-
 
 }

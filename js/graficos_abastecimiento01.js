@@ -7,7 +7,7 @@ function cargarAbastecimiento01(url) {
 function inicializarGraficosA01() {
   // Gráfico de Dispersión
 
-  fetch("/json/abastecimiento01/dispersion.json")
+  fetch("json/abastecimiento01/dispersion.json")
     .then((res) => res.json())
     .then((dispersionData) => {
       // Crear la gráfica
@@ -71,7 +71,7 @@ function inicializarGraficosA01() {
 
   // Gráfico de Predicciones vs Reales
 
-  fetch("/json/abastecimiento01/predicciones_vs_reales.json")
+  fetch("json/abastecimiento01/predicciones_vs_reales.json")
     .then((res) => res.json())
     .then((prediccionesVsRealesData) => {
       const ctxPrediccionesVsReales = document
@@ -126,7 +126,7 @@ function inicializarGraficosA01() {
 
   // Gráfico de Predicciones Futuras
 
-  fetch("/json/abastecimiento01/predicciones_futuras.json")
+  fetch("json/abastecimiento01/predicciones_futuras.json")
     .then((res) => res.json())
     .then((prediccionesFuturasData) => {
       // Crear el gráfico con dos conjuntos de datos
