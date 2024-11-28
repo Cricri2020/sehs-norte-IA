@@ -60,8 +60,8 @@ function inicializarGraficosI02() {
 
     // Recorrer las categorías y cargar sus datos
     for (const campo of campos) {
-      const historicoUrl = `../json/inventario02/historico_${campo}.json`;
-      const prediccionesUrl = `../json/inventario02/predicciones_${campo}.json`;
+      const historicoUrl = `json/inventario02/historico_${campo}.json`;
+      const prediccionesUrl = `json/inventario02/predicciones_${campo}.json`;
 
       // Cargar los archivos JSON para los datos históricos y las predicciones
       const [historicoResponse, prediccionesResponse] = await Promise.all([
@@ -100,7 +100,7 @@ function inicializarGraficosI02() {
 
   // Función para cargar los datos desde el archivo JSON
   async function fetchData() {
-    const response = await fetch("../json/inventario02/comparison_data.json"); // Asegúrate de tener el archivo en tu servidor
+    const response = await fetch("json/inventario02/comparison_data.json"); // Asegúrate de tener el archivo en tu servidor
     const data = await response.json();
     return data;
   }
