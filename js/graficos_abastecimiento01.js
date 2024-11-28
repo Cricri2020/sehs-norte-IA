@@ -6,7 +6,6 @@ function cargarAbastecimiento01(url) {
 
 function inicializarGraficosA01() {
   // Gráfico de Dispersión
-
   fetch("json/abastecimiento01/dispersion.json")
     .then((res) => res.json())
     .then((dispersionData) => {
