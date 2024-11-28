@@ -50,7 +50,7 @@ function inicializarGraficosI02() {
   // Función para cargar los datos desde los archivos JSON y generar los gráficos
   async function cargarYGenerarGraficos() {
     const campos = [
-      "SEHS ANOP",
+      "SEHS_ANOP",
       "SEHS APCE",
       "SEHS MICOP",
       "SEHS MNO",
