@@ -34,6 +34,7 @@ function inicializarGraficosA2() {
             title: {
               display: true,
               text: "Predicción de Costo Promedio por Categoría para 2024",
+              font: {size: 18}
             },
           },
           scales: {
@@ -108,6 +109,7 @@ function inicializarGraficosA2() {
               title: {
                 display: true,
                 text: `Evolución de Costos - ${grafico.Categoria}`,
+                font: {size: 18}
               },
             },
             scales: {
@@ -170,6 +172,7 @@ function inicializarGraficosA2() {
               title: {
                 display: true,
                 text: `Comparación de Predicciones vs Valores Reales - ${data.Categoria}`,
+                font: {size: 18}
               },
             },
             scales: {

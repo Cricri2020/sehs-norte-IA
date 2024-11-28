@@ -47,6 +47,7 @@ function inicializarGraficosA01() {
             title: {
               display: true,
               text: "Valores Reales vs Predicciones",
+              font: {size: 18}
             },
           },
           scales: {
@@ -103,6 +104,7 @@ function inicializarGraficosA01() {
             title: {
               display: true,
               text: "Predicciones vs Valores Reales",
+              font: {size: 18}
             },
           },
           scales: {
@@ -167,6 +169,7 @@ function inicializarGraficosA01() {
             title: {
               display: true,
               text: "Predicciones Futuras y Datos Históricos",
+              font: {size: 18}
             },
           },
           scales: {
@@ -229,6 +232,7 @@ function inicializarGraficosA01() {
             title: {
               display: true,
               text: "Comparación de Predicciones vs Valores Reales por Año",
+              font: {size: 18}
             },
             legend: {
               position: "top",

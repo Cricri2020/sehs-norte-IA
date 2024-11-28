@@ -50,6 +50,7 @@ function inicializarGraficosI01() {
               title: {
                 display: true,
                 text: `Comparación de Predicciones vs Valores Reales - ${categoria}`,
+                font: {size: 18}
               },
             },
             scales: {
