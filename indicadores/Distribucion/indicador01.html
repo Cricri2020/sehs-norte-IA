@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Costo transporte</title>
-    <link rel="stylesheet" href="../../css/pg-style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../../css/pg-style.css" />
+  </head>
+  <body>
     <h1 class="title">Costo por unidad transportada</h1>
-</body>
+
+    <!-- Contenedor para los gráficos -->
+    <div class="contenido">
+      <div id="categorias" class="grafico">
+        <div id="graficosContainer"></div>
+      </div>
+
+      <div id="reales-vs-predichos" class="grafico">
+        <h4>Comparación Valores Reales vs Predichos</h4>
+        <canvas id="scatterChart"></canvas>
+      </div>
+      <div class="grafico">
+        <h4>Comparación Valores Reales vs Predichos</h4>
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+  </body>
 </html>

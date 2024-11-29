@@ -74,7 +74,7 @@ function inicializarGraficosI02() {
 
       // Crear un contenedor para cada gráfico
       const chartContainer = document.createElement("div");
-      chartContainer.style.marginBottom = "30px";
+      chartContainer.style.marginBottom = "8vh";
       const chartTitle = document.createElement("h4");
       chartTitle.innerText = `Cantidad de productos inventariados - Campo: ${campo}`;
       chartContainer.appendChild(chartTitle);

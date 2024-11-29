@@ -95,7 +95,7 @@
                             onclick="cargarInventario01('./indicadores/Inventario/indicador01.html')">Niveles de
                             inventario</a>
                         <a class="collapse-item" href="#"
-                            onclick="cargarInventario02('./indicadores/Inventario/indicador02.html')"">Rotación del inventario</a>
+                            onclick="cargarInventario02('./indicadores/Inventario/indicador02.html')">Rotación del inventario</a>
                     </div>
                 </div>
             </li>
@@ -112,7 +112,7 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     <h6 class="collapse-header">Indicadores:</h6>
                                     <a class="collapse-item" href="#"
-                                        onclick="$('#content').load('./indicadores/Distribucion/indicador01.html')">Costo
+                                        onclick="cargarDistribucion('./indicadores/Distribucion/indicador01.html')">Costo
                                         transporte</a>
                                 </div>
                             </div>
@@ -149,10 +149,10 @@
                                 <a class="nav-link" href="index.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#resultados">Dimensiones</a>
+                                <a class="nav-link" href="#" onclick="$('#content').load('dimensiones.html')">Dimensiones</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#cta">Contacto</a>
+                                <a class="nav-link" href="#" onclick="$('#content').load('contacto.html')">Contacto</a>
                             </li>
                         </ul>
                     </div>
@@ -270,10 +270,10 @@
                             <h2 class="mb-4">Conoce más sobre nuestras soluciones</h2>
                             <p class="lead mb-5">
                                 Descubre cómo nuestras herramientas predictivas pueden revolucionar la logística de tu
-                                empresa. Explora nuestros <a href="/dimensiones">indicadores y dimensiones</a> para
+                                empresa. Explora nuestros <a href="#" onclick="$('#content').load('dimensiones.html')">indicadores y dimensiones</a> para
                                 conocer los resultados en detalle.
                             </p>
-                            <a href="/contacto" class="btn btn-primary btn-lg">Contáctanos</a>
+                            <a href="#" onclick="$('#content').load('contacto.html')" class="btn btn-primary btn-lg">Contáctanos</a>
                         </div>
                     </section>
                 </div>
@@ -335,6 +335,7 @@
     <script src="js/graficos_abastecimiento01.js"></script>
     <script src="js/graficos_inventario01.js"></script>
     <script src="js/graficos_inventario02.js"></script>
+    <script src="js/graficos_distribucion.js"></script>
 
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
