@@ -114,7 +114,7 @@ function inicializarGraficosI02() {
       data: {
         datasets: [
           {
-            label: "Valores Predichos",
+            label: "Predicciones",
             data: data.real_values.map((value, index) => ({
               x: value,
               y: data.predicted_values[index],
@@ -124,7 +124,7 @@ function inicializarGraficosI02() {
             borderWidth: 1,
           },
           {
-            label: "Valores Reales",
+            label: "Valores Históricos",
             data: data.real_values.map((value) => ({
               x: value,
               y: value,
@@ -143,7 +143,7 @@ function inicializarGraficosI02() {
           x: {
             title: {
               display: true,
-              text: "Valores Reales",
+              text: "Valores Históricos",
             },
             min: Math.min(...data.real_values) - 1,
             max: Math.max(...data.real_values) + 1,
@@ -151,7 +151,7 @@ function inicializarGraficosI02() {
           y: {
             title: {
               display: true,
-              text: "Valores Predichos",
+              text: "Predicciones",
             },
             min: Math.min(...data.predicted_values) - 1,
             max: Math.max(...data.predicted_values) + 1,
@@ -180,7 +180,7 @@ function inicializarGraficosI02() {
             pointRadius: 5,
           },
           {
-            label: "Valores Predichos",
+            label: "Predicciones",
             data: data.predicted_values,
             borderColor: "rgba(153, 102, 255, 1)",
             borderWidth: 1,

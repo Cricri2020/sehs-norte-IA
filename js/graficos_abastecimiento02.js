@@ -171,7 +171,7 @@ function inicializarGraficosA2() {
               legend: { display: true },
               title: {
                 display: true,
-                text: `Comparación de Predicciones vs Valores Reales - ${data.Categoria}`,
+                text: `Comparación de Predicciones vs Valores Históricos - ${data.Categoria}`,
                 font: {size: 18}
               },
             },

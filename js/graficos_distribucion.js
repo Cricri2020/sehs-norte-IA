@@ -78,12 +78,12 @@ Promise.all([
       data: {
         datasets: [
           {
-            label: 'Valores Predichos',
+            label: 'Predicciones',
             data: valoresReales.map((x, i) => ({ x, y: valoresPredichos[i] })),
             backgroundColor: 'rgba(75, 192, 192, 1)',
           },
           {
-            label: 'Valores Reales',
+            label: 'Valores Históricos',
             data: [
               { x: Math.min(...valoresReales), y: Math.min(...valoresReales) },
               { x: Math.max(...valoresReales), y: Math.max(...valoresReales) },
@@ -99,11 +99,11 @@ Promise.all([
         responsive: true,
         plugins: {
           legend: { position: 'top' },
-          title: { display: true, text: 'Valores Reales vs Predichos (Dispersión)', font: { size: 18 }, },
+          title: { display: true, text: 'Valores Históricos vs Predicciones (Dispersión)', font: { size: 18 }, },
         },
         scales: {
-          x: { title: { display: true, text: 'Valores Reales' } },
-          y: { title: { display: true, text: 'Valores Predichos' } },
+          x: { title: { display: true, text: 'Valores Históricos' } },
+          y: { title: { display: true, text: 'Predicciones' } },
         },
       },
     });
@@ -115,14 +115,14 @@ Promise.all([
         labels: Array.from({ length: valoresReales.length }, (_, i) => i + 1),
         datasets: [
           {
-            label: 'Valores Reales',
+            label: 'Valores Históricos',
             data: valoresReales,
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 2,
             fill: false,
           },
           {
-            label: 'Valores Predichos',
+            label: 'Predicciones',
             data: valoresPredichos,
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 2,
@@ -134,7 +134,7 @@ Promise.all([
         responsive: true,
         plugins: {
           legend: { position: 'top' },
-          title: { display: true, text: 'Comparación de Valores Reales y Predichos (Líneas)', font: { size: 18 }, },
+          title: { display: true, text: 'Comparación de Valores Históricos y Predicciones (Líneas)', font: { size: 18 }, },
         },
         scales: {
           x: { title: { display: true, text: 'Índice' } },

@@ -19,7 +19,7 @@ function inicializarGraficosA01() {
         data: {
           datasets: [
             {
-              label: "Valores Reales vs Predicciones", // Puntos de dispersión
+              label: "Predicciones", // Puntos de dispersión
               data: dispersionData.valores_reales.map((real, i) => ({
                 x: real,
                 y: dispersionData.predicciones[i],
@@ -29,7 +29,7 @@ function inicializarGraficosA01() {
               pointRadius: 5,
             },
             {
-              label: "Línea de Identidad (Real = Predicho)", // Línea roja
+              label: "Valores Históricos", // Línea roja
               data: dispersionData.valores_reales.map((real) => ({
                 x: real,
                 y: real,
@@ -54,7 +54,7 @@ function inicializarGraficosA01() {
             x: {
               title: {
                 display: true,
-                text: "Valores Reales",
+                text: "Valores Históricos",
               },
             },
             y: {
@@ -208,7 +208,7 @@ function inicializarGraficosA01() {
           labels: data.anios, // Años como etiquetas en el eje X
           datasets: [
             {
-              label: "Valor Real",
+              label: "Valor Histórico",
               data: data.valores_reales,
               borderColor: "rgba(54, 162, 235, 1)", // Azul
               backgroundColor: "rgba(54, 162, 235, 0.2)",

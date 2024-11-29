@@ -27,7 +27,7 @@ function inicializarGraficosI01() {
             labels: data.Años,
             datasets: [
               {
-                label: `Valores Reales - ${categoria}`,
+                label: `Valores Históricos - ${categoria}`,
                 data: data.Valores_Reales,
                 borderColor: "blue",
                 fill: false,
@@ -49,7 +49,7 @@ function inicializarGraficosI01() {
               legend: { display: true },
               title: {
                 display: true,
-                text: `Comparación de Predicciones vs Valores Reales - ${categoria}`,
+                text: `Comparación de Predicciones vs Valores Históricos - ${categoria}`,
                 font: { size: 18 },
               },
             },

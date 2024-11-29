@@ -1,324 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
     <title>Predicciones SEHS</title>
-    <link rel="icon" href="img/logo_sehs.png" type="image/x-icon">
-
+    <link rel="icon" href="img/logo_sehs.png" type="image/x-icon" />
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      rel="stylesheet"
+    />
     <!-- Custom styles for this template-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/sb-admin-2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/pg-style.css" />
+  </head>
 
-</head>
-
-<body id="page-top">
-
+  <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="index.html"
+        >
+          <div class="sidebar-brand-icon">
+            <i class="fa-solid fa-chart-simple" style="color: #ffffff"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Predicciones</div>
+        </a>
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
-                    <i class="fa-solid fa-chart-simple" style="color: #ffffff;"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Predicciones</div>
-            </a>
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">
+            <i class="fa-solid fa-house" style="color: #ffffff"></i>
+            <span>HOME</span></a
+          >
+        </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fa-solid fa-house" style="color: #ffffff;"></i>
-                    <span>HOME</span></a>
-            </li>
+        <!-- Heading -->
+        <div class="sidebar-heading">DIMENSIONES</div>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                DIMENSIONES
+        <!-- Nav Item - Pages Collapse Menu -->
+        <!--DIMENSIÓN ABASTECIMIENTO-->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            <i class="fas fa-fw fa-box-open"></i>
+            <span>Abastecimiento</span>
+          </a>
+          <div
+            id="collapseOne"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Indicadores:</h6>
+              <a
+                class="collapse-item"
+                href="#"
+                onclick="cargarAbastecimiento01('./indicadores/Abastecimiento/indicador01.html')"
+                >Porcentaje de ventas</a
+              >
+              <a
+                class="collapse-item"
+                href="#"
+                onclick="cargarAbastecimiento02('./indicadores/Abastecimiento/indicador02.html')"
+                >Tasa de crecimiento</a
+              >
             </div>
+          </div>
+        </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <!--DIMENSIÓN ABASTECIMIENTO-->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-fw fa-box-open"></i>
-                    <span>Abastecimiento</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Indicadores:</h6>
-                        <a class="collapse-item" href="#"
-                            onclick="cargarAbastecimiento01('./indicadores/Abastecimiento/indicador01.html')">Porcentaje
-                            de ventas</a>
-                        <a class="collapse-item" href="#"
-                            onclick="cargarAbastecimiento02('./indicadores/Abastecimiento/indicador02.html')">Tasa de
-                            crecimiento</a>
-                    </div>
-                </div>
-            </li>
-
-            <!--DIMENSIÓN INVENTARIO-->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-paste"></i>
-                    <span>Inventario</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Indicadores:</h6>
-                        <a class="collapse-item" href="#"
-                            onclick="cargarInventario01('./indicadores/Inventario/indicador01.html')">Niveles de
-                            inventario</a>
-                        <a class="collapse-item" href="#"
-                            onclick="cargarInventario02('./indicadores/Inventario/indicador02.html')">Rotación del inventario</a>
-                    </div>
-                </div>
-            </li>
-
-            <!--DIMENSIÓN DISTRIBUCIÓN-->
-            <li class=" nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                                aria-expanded="true" aria-controls="collapseThree">
-                                <i class="fas fa-fw fa-truck-arrow-right"></i>
-                                <span>Distribución</span>
-                            </a>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo"
-                                data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Indicadores:</h6>
-                                    <a class="collapse-item" href="#"
-                                        onclick="cargarDistribucion('./indicadores/Distribucion/indicador01.html')">Costo
-                                        transporte</a>
-                                </div>
-                            </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <!--DIMENSIÓN INVENTARIO-->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#collapseTwo"
+            aria-expanded="true"
+            aria-controls="collapseTwo"
+          >
+            <i class="fas fa-fw fa-paste"></i>
+            <span>Inventario</span>
+          </a>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Indicadores:</h6>
+              <a
+                class="collapse-item"
+                href="#"
+                onclick="cargarInventario01('./indicadores/Inventario/indicador01.html')"
+                >Niveles de inventario</a
+              >
+              <a
+                class="collapse-item"
+                href="#"
+                onclick="cargarInventario02('./indicadores/Inventario/indicador02.html')"
+                >Rotación del inventario</a
+              >
             </div>
+          </div>
+        </li>
 
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Barra de navegación con logo -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-                <div class="container">
-                    <!-- Aquí agregarías tu logo real -->
-                    <a class="navbar-brand" href="#">
-                        <img src="img/logo_sehs.png" alt="Logo SEHS Norte" class="navbar-logo">
-                    </a>
-                    <!-- Opcional: elementos de navegación adicionales -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="$('#content').load('dimensiones.html')">Dimensiones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="$('#content').load('contacto.html')">Contacto</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Main Content -->
-            <div id="content">
-
-
-                <!--CONTENIDO PRINCIPAL DE LA PÁGINA WEB-->
-
-
-                <div class="container">
-                    <!-- Sección de introducción -->
-                    <section id="introduccion" class="section-padding text-center">
-                        <div class="container">
-                            <h2 class="mb-4">¿Qué ofrecemos?</h2>
-                            <p class="lead mb-4">
-                                En SEHS Norte, implementamos un modelo de cadena de suministro inteligente basado en
-                                tecnologías avanzadas de <strong>Machine Learning</strong> para optimizar la logística
-                                de abastecimiento, inventario y distribución. Nuestro enfoque utiliza la metodología
-                                CRISP-DM, garantizando análisis de datos detallados y decisiones basadas en predicciones
-                                precisas.
-                            </p>
-                            <img src="img/diseño_cadena_suministro_inteligente.png" alt="Cadena de suministro inteligente"
-                                class="img-fluid rounded shadow">
-                        </div>
-                    </section>
-
-                    <!-- Beneficios de la solución -->
-                    <section id="beneficios" class="section-padding bg-light-blue">
-                        <div class="container">
-                            <h2 class="text-center mb-5">Beneficios Clave</h2>
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h4><strong>Abastecimiento optimizado</strong></h4>
-                                            <p>Predicción precisa de demandas para garantizar disponibilidad.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h4><strong>Gestión de inventario eficiente</strong></h4>
-                                            <p>Reducción de costos de almacenamiento y prevención de excesos o
-                                                faltantes.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h4><strong>Distribución inteligente</strong></h4>
-                                            <p>Minimización de tiempos y costos en la entrega de materiales.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center mt-4">
-                                <img src="https://blogs.evaluar.com/hs-fs/hub/398634/file-2073376242-jpg/images/trabajadores-felices.jpg" alt="Optimización de recursos"
-                                    class="img-fluid rounded shadow">
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Resultados destacados -->
-                    <section id="resultados" class="section-padding">
-                        <div class="container text-center">
-                            <h2 class="mb-4">Impacto de nuestras predicciones</h2>
-                            <p class="lead mb-5">
-                                Gracias a la implementación de modelos de <strong>Random Forest</strong>, <strong>Redes
-                                    Neuronales LSTM</strong> y <strong>Support Vector Machines</strong>, hemos logrado:
-                            </p>
-                            <div class="row">
-                                <div class="col-md-4 mb-4">
-                                    <div class="card resultado h-100 shadow-sm">
-                                        <div class="card-body">
-                                            <h3>Abastecimiento</h3>
-                                            <p>Demanda predicha con una precisión superior al 90%.</p>
-                                            <img src="https://www.cercatechnology.com/wp-content/uploads/2023/04/Imagen_Expertos-responden-Ecommerce-300x200.png" alt="Abastecimiento"
-                                                class="img-fluid rounded">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-4">
-                                    <div class="card resultado h-100 shadow-sm">
-                                        <div class="card-body">
-                                            <h3>Inventario</h3>
-                                            <p>Stock mínimo optimizado por trimestre, reduciendo costos en un 25%.</p>
-                                            <img src="https://glosario.villanett.com/wp-content/uploads/2021/11/inventario-300x200.jpg" alt="Inventario"
-                                                class="img-fluid rounded">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-4">
-                                    <div class="card resultado h-100 shadow-sm">
-                                        <div class="card-body">
-                                            <h3>Distribución</h3>
-                                            <p>Rutas de entrega optimizadas, reduciendo tiempos en un 20%.</p>
-                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-MmPIrVwRyYUfdCT1aZGiqgvxT698LWU-8A&s" alt="Distribución"
-                                                class="img-fluid rounded">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Llamado a la acción -->
-                    <section id="cta" class="section-padding bg-light-blue text-center">
-                        <div class="container">
-                            <h2 class="mb-4">Conoce más sobre nuestras soluciones</h2>
-                            <p class="lead mb-5">
-                                Descubre cómo nuestras herramientas predictivas pueden revolucionar la logística de tu
-                                empresa. Explora nuestros <a href="#" onclick="$('#content').load('dimensiones.html')">indicadores y dimensiones</a> para
-                                conocer los resultados en detalle.
-                            </p>
-                            <a href="#" onclick="$('#content').load('contacto.html')" class="btn btn-primary btn-lg">Contáctanos</a>
-                        </div>
-                    </section>
-                </div>
+        <!--DIMENSIÓN DISTRIBUCIÓN-->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#collapseThree"
+            aria-expanded="true"
+            aria-controls="collapseThree"
+          >
+            <i class="fas fa-fw fa-truck-arrow-right"></i>
+            <span>Distribución</span>
+          </a>
+          <div
+            id="collapseThree"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Indicadores:</h6>
+              <a
+                class="collapse-item"
+                href="#"
+                onclick="cargarDistribucion('./indicadores/Distribucion/indicador01.html')"
+                >Costo transporte</a
+              >
             </div>
-            <!-- End of Main Content -->
+          </div>
+        </li>
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Christian Ovalle - SEHS 2024</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
 
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-        <!-- End of Content Wrapper -->
+      </ul>
+      <!-- End of Sidebar -->
 
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Barra de navegación con logo -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+          <div class="container">
+            <!-- Aquí agregarías tu logo real -->
+            <a class="navbar-brand" href="#">
+              <img
+                src="img/logo_sehs.png"
+                alt="Logo SEHS Norte"
+                class="navbar-logo"
+              />
+            </a>
+            <!-- Opcional: elementos de navegación adicionales -->
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    onclick="$('#content').load('dimensiones.html')"
+                    >Dimensiones</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    onclick="$('#content').load('contacto.html')"
+                    >Contacto</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div id="content">
+          <!--CONTENIDO PRINCIPAL DE LA PÁGINA WEB-->
+
+          <div class="container">
+            <!-- Sección de introducción -->
+            <section id="introduccion" class="section-padding text-center">
+              <div class="container">
+                <h2 class="mb-4">Modelo Predictivo para la Gestión Logística del SEHS-Norte</h2>
+                <p class="lead mb-4">
+                  En SEHS Norte, implementamos un modelo de cadena de suministro
+                  inteligente basado en tecnologías avanzadas de
+                  <strong>Machine Learning</strong> para optimizar la logística
+                  de abastecimiento, inventario y distribución. Nuestro enfoque
+                  utiliza la metodología <strong>Ensemble Stacking</strong>, garantizando análisis de
+                  datos detallados y decisiones basadas en predicciones
+                  precisas.
+                </p>
+                <img
+                  src="img/Cadena_Suministro_Inteligente_800x600.png"
+                  alt="Cadena de suministro inteligente"
+                  class="img-fluid rounded shadow"
+                />
+              </div>
+            </section>
+
+            <!-- Beneficios de la solución -->
+            <section id="beneficios" class="section-padding bg-light-blue">
+              <div class="container">
+                <h2 class="text-center mb-5">Beneficios Clave</h2>
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                      <div class="card-body text-center">
+                        <h4><strong>Abastecimiento optimizado</strong></h4>
+                        <p>
+                          Predicción precisa de demandas para garantizar
+                          disponibilidad.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                      <div class="card-body text-center">
+                        <h4>
+                          <strong>Gestión de inventario eficiente</strong>
+                        </h4>
+                        <p>
+                          Reducción de costos de almacenamiento y prevención de
+                          excesos o faltantes.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                      <div class="card-body text-center">
+                        <h4><strong>Distribución inteligente</strong></h4>
+                        <p>
+                          Minimización de tiempos y costos en la entrega de
+                          materiales.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center mt-4">
+                  <img
+                    src="https://blogs.evaluar.com/hs-fs/hub/398634/file-2073376242-jpg/images/trabajadores-felices.jpg"
+                    alt="Optimización de recursos"
+                    class="img-fluid rounded shadow"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <!-- Resultados destacados -->
+            <section id="resultados" class="section-padding">
+              <div class="container text-center">
+                <h2 class="mb-4">Impacto de nuestras predicciones</h2>
+                <p class="lead mb-5">
+                  Gracias a la implementación de modelos de
+                  <strong>Random Forest</strong>,
+                  <strong>Redes Neuronales LSTM</strong> y
+                  <strong>Support Vector Machines</strong>, hemos logrado:
+                </p>
+                <div class="row">
+                  <div class="col-md-4 mb-4">
+                    <div class="card resultado h-100 shadow-sm">
+                      <div class="card-body">
+                        <h3>Abastecimiento</h3>
+                        <p>
+                          Demanda predicha con una precisión superior al 90%.
+                        </p>
+                        <img
+                          src="https://www.cercatechnology.com/wp-content/uploads/2023/04/Imagen_Expertos-responden-Ecommerce-300x200.png"
+                          alt="Abastecimiento"
+                          class="img-fluid rounded"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-4">
+                    <div class="card resultado h-100 shadow-sm">
+                      <div class="card-body">
+                        <h3>Inventario</h3>
+                        <p>
+                          Stock mínimo optimizado por trimestre, reduciendo
+                          costos en un 25%.
+                        </p>
+                        <img
+                          src="https://glosario.villanett.com/wp-content/uploads/2021/11/inventario-300x200.jpg"
+                          alt="Inventario"
+                          class="img-fluid rounded"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-4">
+                    <div class="card resultado h-100 shadow-sm">
+                      <div class="card-body">
+                        <h3>Distribución</h3>
+                        <p>
+                          Rutas de entrega optimizadas, reduciendo tiempos en un
+                          20%.
+                        </p>
+                        <img
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-MmPIrVwRyYUfdCT1aZGiqgvxT698LWU-8A&s"
+                          alt="Distribución"
+                          class="img-fluid rounded"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Llamado a la acción -->
+            <section id="cta" class="section-padding bg-light-blue text-center">
+              <div class="container">
+                <h2 class="mb-4">Conoce más sobre nuestras soluciones</h2>
+                <p class="lead mb-5">
+                  Descubre cómo nuestras herramientas predictivas pueden
+                  revolucionar la logística de tu empresa. Explora nuestros
+                  <a href="#" onclick="$('#content').load('dimensiones.html')"
+                    >indicadores y dimensiones</a
+                  >
+                  para conocer los resultados en detalle.
+                </p>
+                <a
+                  href="#"
+                  onclick="$('#content').load('contacto.html')"
+                  class="btn btn-primary btn-lg"
+                  >Contáctanos</a
+                >
+              </div>
+            </section>
+          </div>
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Christian Ovalle - SEHS 2024</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
+      <i class="fas fa-angle-up"></i>
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="logoutModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button
+              class="close"
+              type="button"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Select "Logout" below if you are ready to end your current session.
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
@@ -345,8 +481,5 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-</body>
-
+  </body>
 </html>
