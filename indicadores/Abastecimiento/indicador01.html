@@ -22,10 +22,22 @@
       </div>
       <div class="grafico">
         <h4>Predicción del Costo Total de Abastecimiento Anual</h4>
-        <canvas id="prediccionesFuturasChart"></canvas>
+        <div class="d-flex align-items-center">
+          <label for="filterYearPrediccionesFuturas" class="me-2">Filtrar por Año:</label>
+          <select id="filterYearPrediccionesFuturas" class="form-select form-select-sm w-auto">
+            <option value="all">Todos</option>
+          </select>
+        </div>
+        <canvas id="prediccionesFuturasChart"></canvas>        
       </div>
       <div class="grafico">
         <h4>Comparación de Predicciones vs Valores Reales por Año</h4>
+        <div class="d-flex align-items-center">
+          <label for="filterYearComparacion" class="me-2">Filtrar por Año:</label>
+          <select id="filterYearComparacion" class="form-select form-select-sm w-auto">
+            <option value="all">Todos</option>
+          </select>
+        </div>
         <canvas id="comparacionPrediccionesChart"></canvas>
       </div>
     </div>

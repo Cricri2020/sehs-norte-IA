@@ -47,7 +47,7 @@ function inicializarGraficosA01() {
             title: {
               display: true,
               text: "Valores Reales vs Predicciones",
-              font: {size: 18}
+              font: { size: 18 },
             },
           },
           scales: {
@@ -70,7 +70,6 @@ function inicializarGraficosA01() {
     .catch((error) => console.error("Error al cargar el JSON:", error));
 
   // Gráfico de Predicciones vs Reales
-
   fetch("json/abastecimiento01/predicciones_vs_reales.json")
     .then((res) => res.json())
     .then((prediccionesVsRealesData) => {
@@ -84,7 +83,7 @@ function inicializarGraficosA01() {
           labels: prediccionesVsRealesData.fechas,
           datasets: [
             {
-              label: "Valores Reales",
+              label: "Valores Históricos",
               data: prediccionesVsRealesData.valores_reales,
               borderColor: "rgba(255, 99, 132, 1)",
               backgroundColor: "rgba(255, 99, 132, 0.2)",
@@ -104,7 +103,7 @@ function inicializarGraficosA01() {
             title: {
               display: true,
               text: "Predicciones vs Valores Reales",
-              font: {size: 18}
+              font: { size: 18 },
             },
           },
           scales: {
@@ -126,67 +125,131 @@ function inicializarGraficosA01() {
     });
 
   // Gráfico de Predicciones Futuras
-
+  let prediccionesChart;
   fetch("json/abastecimiento01/predicciones_futuras.json")
     .then((res) => res.json())
     .then((prediccionesFuturasData) => {
-      // Crear el gráfico con dos conjuntos de datos
-      const ctxPrediccionesFuturas = document
-        .getElementById("prediccionesFuturasChart")
-        .getContext("2d");
+      // Extraer años únicos de las fechas
+      const allYears = [
+        ...new Set([
+          ...prediccionesFuturasData.fechas_historicas.map((fecha) =>
+            new Date(fecha).getFullYear()
+          ),
+          ...prediccionesFuturasData.fechas_futuras.map((fecha) =>
+            new Date(fecha).getFullYear()
+          ),
+        ]),
+      ];
 
-      new Chart(ctxPrediccionesFuturas, {
-        type: "line",
-        data: {
-          labels: [
-            ...prediccionesFuturasData.fechas_historicas, // Fechas históricas primero
-            ...prediccionesFuturasData.fechas_futuras, // Fechas futuras después
-          ],
-          datasets: [
-            {
-              label: "Costos Históricos",
-              data: prediccionesFuturasData.costos_historicos,
-              borderColor: "rgba(54, 162, 235, 1)", // Azul
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              tension: 0.4,
-            },
-            {
-              label: "Predicciones Futuras",
-              data: [
-                ...Array(prediccionesFuturasData.fechas_historicas.length).fill(
-                  null
-                ), // Los datos históricos no tienen valores futuros
-                ...prediccionesFuturasData.predicciones_futuras, // Los valores de las predicciones futuras
-              ],
-              borderColor: "rgba(255, 99, 132, 1)", // Rojo
-              backgroundColor: "rgba(255, 99, 132, 0.2)",
-              tension: 0.4,
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            title: {
-              display: true,
-              text: "Predicciones Futuras y Datos Históricos",
-              font: {size: 18}
-            },
+      // Crear opciones en el <select>
+      const filterSelect = document.getElementById(
+        "filterYearPrediccionesFuturas"
+      );
+      allYears.forEach((year) => {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        filterSelect.appendChild(option);
+      });
+
+      // Función para filtrar datos según el año seleccionado
+      const filterDataByYear = (year) => {
+        const filteredLabels = [];
+        const filteredHistoricos = [];
+        const filteredFuturos = [];
+
+        prediccionesFuturasData.fechas_historicas.forEach((fecha, index) => {
+          const currentYear = new Date(fecha).getFullYear();
+          if (year === "all" || currentYear === parseInt(year)) {
+            filteredLabels.push(fecha);
+            filteredHistoricos.push(
+              prediccionesFuturasData.costos_historicos[index]
+            );
+            filteredFuturos.push(null); // Mantener valores futuros como null
+          }
+        });
+
+        prediccionesFuturasData.fechas_futuras.forEach((fecha, index) => {
+          const currentYear = new Date(fecha).getFullYear();
+          if (year === "all" || currentYear === parseInt(year)) {
+            filteredLabels.push(fecha);
+            filteredHistoricos.push(null); // Mantener valores históricos como null
+            filteredFuturos.push(
+              prediccionesFuturasData.predicciones_futuras[index]
+            );
+          }
+        });
+
+        return { filteredLabels, filteredHistoricos, filteredFuturos };
+      };
+
+      // Crear el gráfico inicial
+      const createChart = (data) => {
+        const ctxPrediccionesFuturas = document
+          .getElementById("prediccionesFuturasChart")
+          .getContext("2d");
+
+        return new Chart(ctxPrediccionesFuturas, {
+          type: "line",
+          data: {
+            labels: data.filteredLabels,
+            datasets: [
+              {
+                label: "Costos Históricos",
+                data: data.filteredHistoricos,
+                borderColor: "rgba(54, 162, 235, 1)", // Azul
+                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                tension: 0.4,
+              },
+              {
+                label: "Predicciones Futuras",
+                data: data.filteredFuturos,
+                borderColor: "rgba(255, 99, 132, 1)", // Rojo
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                tension: 0.4,
+              },
+            ],
           },
-          scales: {
-            x: {
+          options: {
+            plugins: {
               title: {
                 display: true,
-                text: "Fecha",
+                text: "Predicciones Futuras y Datos Históricos",
+                font: { size: 18 },
               },
             },
-            y: {
-              title: {
-                display: true,
-                text: "Costos",
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Fecha",
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Costos",
+                },
               },
             },
           },
-        },
+        });
+      };
+
+      // Filtrar datos y crear el gráfico inicial
+      const initialData = filterDataByYear("all");
+      prediccionesChart = createChart(initialData);
+
+      // Actualizar el gráfico cuando se seleccione un año
+      filterSelect.addEventListener("change", (event) => {
+        const selectedYear = event.target.value;
+        const filteredData = filterDataByYear(selectedYear);
+
+        prediccionesChart.data.labels = filteredData.filteredLabels;
+        prediccionesChart.data.datasets[0].data =
+          filteredData.filteredHistoricos;
+        prediccionesChart.data.datasets[1].data = filteredData.filteredFuturos;
+        prediccionesChart.update();
       });
     })
     .catch((error) => {
@@ -194,66 +257,123 @@ function inicializarGraficosA01() {
     });
 
   //Gráfico de Comparaciones de Predicciones vs Valores Reales por Año
-
   fetch("json/abastecimiento01/comparacion_predicciones.json")
     .then((res) => res.json())
     .then((data) => {
-      const ctxComparacion = document
-        .getElementById("comparacionPrediccionesChart")
-        .getContext("2d");
+      // Validar y filtrar años únicos válidos
+      const validYears = [
+        ...new Set(
+          data.anios.map((anio) =>
+            isNaN(parseInt(anio)) ? null : parseInt(anio)
+          )
+        ),
+      ].sort();
 
-      new Chart(ctxComparacion, {
-        type: "line",
-        data: {
-          labels: data.anios, // Años como etiquetas en el eje X
-          datasets: [
-            {
-              label: "Valor Histórico",
-              data: data.valores_reales,
-              borderColor: "rgba(54, 162, 235, 1)", // Azul
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              tension: 0.4,
-              pointStyle: "circle",
-              pointRadius: 5,
-            },
-            {
-              label: "Predicción",
-              data: data.predicciones,
-              borderColor: "rgba(255, 99, 132, 1)", // Rojo
-              backgroundColor: "rgba(255, 99, 132, 0.2)",
-              tension: 0.5,
-              pointStyle: "cross",
-              pointRadius: 5,
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            title: {
-              display: true,
-              text: "Comparación de Predicciones vs Valores Reales por Año",
-              font: {size: 18}
-            },
-            legend: {
-              position: "top",
-            },
+      // Mostrar años válidos en la consola (para depuración)
+      console.log("Años válidos detectados:", validYears);
+
+      // Crear opciones en el <select>
+      const filterSelect = document.getElementById("filterYearComparacion");
+      validYears.forEach((year) => {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        filterSelect.appendChild(option);
+      });
+
+      // Función para filtrar los datos según el año seleccionado
+      const filterDataByYear = (year) => {
+        const filteredLabels = [];
+        const filteredValoresReales = [];
+        const filteredPredicciones = [];
+
+        data.anios.forEach((anio, index) => {
+          if (year === "all" || parseInt(anio) === parseInt(year)) {
+            filteredLabels.push(anio);
+            filteredValoresReales.push(data.valores_reales[index]);
+            filteredPredicciones.push(data.predicciones[index]);
+          }
+        });
+
+        return { filteredLabels, filteredValoresReales, filteredPredicciones };
+      };
+
+      // Crear el gráfico inicial
+      const createChart = (filteredData) => {
+        const ctxComparacion = document
+          .getElementById("comparacionPrediccionesChart")
+          .getContext("2d");
+
+        return new Chart(ctxComparacion, {
+          type: "line",
+          data: {
+            labels: filteredData.filteredLabels,
+            datasets: [
+              {
+                label: "Valor Histórico",
+                data: filteredData.filteredValoresReales,
+                borderColor: "rgba(54, 162, 235, 1)", // Azul
+                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                tension: 0.4,
+                pointStyle: "circle",
+                pointRadius: 5,
+              },
+              {
+                label: "Predicción",
+                data: filteredData.filteredPredicciones,
+                borderColor: "rgba(255, 99, 132, 1)", // Rojo
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                tension: 0.5,
+                pointStyle: "cross",
+                pointRadius: 5,
+              },
+            ],
           },
-          scales: {
-            x: {
+          options: {
+            plugins: {
               title: {
                 display: true,
-                text: "Año",
+                text: "Comparación de Predicciones vs Valores Reales por Año",
+                font: { size: 18 },
+              },
+              legend: {
+                position: "top",
               },
             },
-            y: {
-              title: {
-                display: true,
-                text: "Costos Totales de Abastecimiento",
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Año",
+                },
               },
-              beginAtZero: false,
+              y: {
+                title: {
+                  display: true,
+                  text: "Costos Totales de Abastecimiento",
+                },
+                beginAtZero: false,
+              },
             },
           },
-        },
+        });
+      };
+
+      // Filtrar datos y crear el gráfico inicial
+      const initialData = filterDataByYear("all");
+      const comparacionChart = createChart(initialData);
+
+      // Actualizar el gráfico cuando se seleccione un año
+      filterSelect.addEventListener("change", (event) => {
+        const selectedYear = event.target.value;
+        const filteredData = filterDataByYear(selectedYear);
+
+        comparacionChart.data.labels = filteredData.filteredLabels;
+        comparacionChart.data.datasets[0].data =
+          filteredData.filteredValoresReales;
+        comparacionChart.data.datasets[1].data =
+          filteredData.filteredPredicciones;
+        comparacionChart.update();
       });
     })
     .catch((error) => {

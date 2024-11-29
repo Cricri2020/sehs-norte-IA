@@ -28,13 +28,12 @@ function inicializarGraficosA2() {
           ],
         },
         options: {
-          
           plugins: {
             legend: { display: false },
             title: {
               display: true,
               text: "Predicción de Costo Promedio por Categoría para 2024",
-              font: {size: 18}
+              font: { size: 18 },
             },
           },
           scales: {
@@ -53,71 +52,105 @@ function inicializarGraficosA2() {
     .then((response) => response.json())
     .then((data) => {
       const container = document.getElementById("graficosIndividuales");
+      const filterCategory = document.getElementById("filterCategory");
 
-      data.forEach((grafico) => {
-        const canvas = document.createElement("canvas");
-        canvas.style.marginBottom = "8vh";
-        canvas.width = 800;
-        canvas.height = 400;
-        container.appendChild(canvas);
+      // Crear una lista de categorías únicas
+      const categorias = data.map((grafico) => grafico.Categoria);
+      const categoriasUnicas = [...new Set(categorias)];
 
-        const ctx = canvas.getContext("2d");
+      // Agregar las categorías al select
+      categoriasUnicas.forEach((categoria) => {
+        const option = document.createElement("option");
+        option.value = categoria;
+        option.textContent = categoria;
+        filterCategory.appendChild(option);
+      });
 
-        // Crear las etiquetas únicas
-        const etiquetas = [
-          ...grafico.Historicos.Año,
-          ...grafico.Prediccion.Año.filter(
-            (año) => !grafico.Historicos.Año.includes(año)
-          ),
-        ];
+      // Función para renderizar gráficos
+      const renderGraficos = (filtro = "all") => {
+        // Limpiar los gráficos existentes
+        container.innerHTML = "";
 
-        const datosHistoricos = grafico.Historicos.Costo_Promedio;
-        const datosPrediccion = [
-          ...Array(grafico.Historicos.Costo_Promedio.length - 1).fill(null), // Espaciado hasta el último año histórico
-          grafico.Historicos.Costo_Promedio.at(-1), // Último dato histórico
-          grafico.Prediccion.Costo_Promedio, // Predicción para 2024
-        ];
+        // Filtrar los datos si se aplica un filtro
+        const datosFiltrados =
+          filtro === "all"
+            ? data
+            : data.filter((grafico) => grafico.Categoria === filtro);
 
-        new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: etiquetas,
-            datasets: [
-              {
-                label: `Históricos - ${grafico.Categoria}`,
-                data: datosHistoricos,
-                borderColor: "rgba(54, 162, 235, 1)",
-                backgroundColor: "rgba(54, 162, 235, 0.2)",
-                tension: 0.4,
-                fill: true,
+        // Generar los gráficos
+        datosFiltrados.forEach((grafico) => {
+          const canvas = document.createElement("canvas");
+          canvas.style.marginBottom = "8vh";
+          canvas.width = 800;
+          canvas.height = 400;
+          container.appendChild(canvas);
+
+          const ctx = canvas.getContext("2d");
+
+          const etiquetas = [
+            ...grafico.Historicos.Año,
+            ...grafico.Prediccion.Año.filter(
+              (año) => !grafico.Historicos.Año.includes(año)
+            ),
+          ];
+
+          const datosHistoricos = grafico.Historicos.Costo_Promedio;
+          const datosPrediccion = [
+            ...Array(grafico.Historicos.Costo_Promedio.length - 1).fill(null),
+            grafico.Historicos.Costo_Promedio.at(-1),
+            grafico.Prediccion.Costo_Promedio,
+          ];
+
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: etiquetas,
+              datasets: [
+                {
+                  label: `Históricos - ${grafico.Categoria}`,
+                  data: datosHistoricos,
+                  borderColor: "rgba(54, 162, 235, 1)",
+                  backgroundColor: "rgba(54, 162, 235, 0.2)",
+                  tension: 0.4,
+                  fill: true,
+                },
+                {
+                  label: `Predicción - ${grafico.Categoria}`,
+                  data: datosPrediccion,
+                  borderColor: "rgba(255, 99, 132, 1)",
+                  backgroundColor: "rgba(255, 99, 132, 0.2)",
+                  borderDash: [5, 5],
+                  tension: 0.4,
+                  fill: false,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: true },
+                title: {
+                  display: true,
+                  text: `Evolución de Costos - ${grafico.Categoria}`,
+                  font: { size: 18 },
+                },
               },
-              {
-                label: `Predicción - ${grafico.Categoria}`,
-                data: datosPrediccion,
-                borderColor: "rgba(255, 99, 132, 1)", // Línea roja
-                backgroundColor: "rgba(255, 99, 132, 0.2)",
-                borderDash: [5, 5], // Línea punteada
-                tension: 0.4,
-                fill: false,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { display: true },
-              title: {
-                display: true,
-                text: `Evolución de Costos - ${grafico.Categoria}`,
-                font: {size: 18}
+              scales: {
+                x: { title: { display: true, text: "Año" } },
+                y: { title: { display: true, text: "Costo Promedio" } },
               },
             },
-            scales: {
-              x: { title: { display: true, text: "Año" } },
-              y: { title: { display: true, text: "Costo Promedio" } },
-            },
-          },
+          });
         });
+      };
+
+      // Renderizar todos los gráficos inicialmente
+      renderGraficos();
+
+      // Evento para filtrar gráficos al cambiar la categoría
+      filterCategory.addEventListener("change", (event) => {
+        const selectedCategory = event.target.value;
+        renderGraficos(selectedCategory);
       });
     })
     .catch((error) =>
@@ -127,63 +160,97 @@ function inicializarGraficosA2() {
   // Lista de categorías y archivos JSON generados previamente
   const categorias = ["Grupo1", "Grupo2", "Grupo3", "Grupo4"]; // Actualizar con los nombres reales
   const graficosContainer = document.getElementById("graficosContainer");
+  const filterCategory2 = document.getElementById("filterCategory2");
+  // Función para cargar las opciones del select dinámicamente
+  function cargarOpcionesCategorias() {
+    categorias.forEach((categoria) => {
+      const option = document.createElement("option");
+      option.value = categoria;
+      option.textContent = categoria;
+      filterCategory2.appendChild(option);
+    });
+  }
 
-  // Función para cargar los datos JSON y graficar
-  categorias.forEach((categoria) => {
-    const filePath = `json/abastecimiento02/json_data/${categoria}.json`;
+  // Función para cargar y graficar los datos según la categoría seleccionada
+  function cargarGraficos(categoriaSeleccionada) {
+    // Limpiar los gráficos existentes
+    graficosContainer.innerHTML = "";
 
-    fetch(filePath)
-      .then((response) => response.json())
-      .then((data) => {
-        const canvas = document.createElement("canvas");
-        canvas.style.marginBottom = "8vh";
-        graficosContainer.appendChild(canvas);
+    categorias.forEach((categoria) => {
+      // Filtrar según la categoría seleccionada
+      if (
+        categoriaSeleccionada !== "all" &&
+        categoria !== categoriaSeleccionada
+      ) {
+        return;
+      }
 
-        const ctx = canvas.getContext("2d");
+      const filePath = `json/abastecimiento02/json_data/${categoria}.json`;
 
-        new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: data.Historicos.Año,
-            datasets: [
-              {
-                label: `Históricos - ${data.Categoria}`,
-                data: data.Historicos.Costo_Promedio,
-                borderColor: "rgba(54, 162, 235, 1)",
-                backgroundColor: "rgba(54, 162, 235, 0.2)",
-                tension: 0.4,
-                fill: true,
+      fetch(filePath)
+        .then((response) => response.json())
+        .then((data) => {
+          const canvas = document.createElement("canvas");
+          canvas.id = `chart-${categoria}`; // Cambiar el id del canvas según la categoría
+          canvas.style.marginBottom = "8vh";
+          graficosContainer.appendChild(canvas);
+
+          const ctx = canvas.getContext("2d");
+
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: data.Historicos.Año,
+              datasets: [
+                {
+                  label: `Históricos - ${data.Categoria}`,
+                  data: data.Historicos.Costo_Promedio,
+                  borderColor: "rgba(54, 162, 235, 1)",
+                  backgroundColor: "rgba(54, 162, 235, 0.2)",
+                  tension: 0.4,
+                  fill: true,
+                },
+                {
+                  label: `Predicción - ${data.Categoria}`,
+                  data: data.Prediccion.Costo_Promedio,
+                  borderColor: "rgba(255, 99, 132, 1)",
+                  backgroundColor: "rgba(255, 99, 132, 0.2)",
+                  borderDash: [5, 5],
+                  tension: 0.4,
+                  fill: false,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: true },
+                title: {
+                  display: true,
+                  text: `Comparación de Predicciones vs Valores Históricos - ${data.Categoria}`,
+                  font: { size: 18 },
+                },
               },
-              {
-                label: `Predicción - ${data.Categoria}`,
-                data: data.Prediccion.Costo_Promedio,
-                borderColor: "rgba(255, 99, 132, 1)",
-                backgroundColor: "rgba(255, 99, 132, 0.2)",
-                borderDash: [5, 5],
-                tension: 0.4,
-                fill: false,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { display: true },
-              title: {
-                display: true,
-                text: `Comparación de Predicciones vs Valores Históricos - ${data.Categoria}`,
-                font: {size: 18}
+              scales: {
+                x: { title: { display: true, text: "Año" } },
+                y: { title: { display: true, text: "Costo Promedio" } },
               },
             },
-            scales: {
-              x: { title: { display: true, text: "Año" } },
-              y: { title: { display: true, text: "Costo Promedio" } },
-            },
-          },
-        });
-      })
-      .catch((error) =>
-        console.error(`Error al cargar el JSON de ${categoria}:`, error)
-      );
+          });
+        })
+        .catch((error) =>
+          console.error(`Error al cargar el JSON de ${categoria}:`, error)
+        );
+    });
+  }
+
+  // Evento para filtrar gráficos según la categoría seleccionada
+  filterCategory2.addEventListener("change", (event) => {
+    const categoriaSeleccionada = event.target.value;
+    cargarGraficos(categoriaSeleccionada);
   });
+
+  // Inicialización
+  cargarOpcionesCategorias(); // Cargar opciones en el select
+  cargarGraficos("all"); // Mostrar todos los gráficos inicialmente
 }

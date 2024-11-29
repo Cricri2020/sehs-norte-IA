@@ -13,20 +13,42 @@
     <div class="contenido">
       <div class="grafico">
         <h4>Predicciones de Costo Promedio por Categoría para 2024</h4>
-        <canvas id="graficoGeneral" ></canvas>
+        <canvas id="graficoGeneral"></canvas>
       </div>
       <div class="grafico">
         <h4>Evolución de Costos - Grupo01 hasta Grupo04</h4>
+        <div class="d-flex align-items-center mb-3">
+          <label for="filterCategory" class="me-2"
+            >Filtrar por Categoría:</label
+          >
+          <select id="filterCategory" class="form-select form-select-sm w-auto">
+            <option value="all">Todas</option>
+            <!-- Opciones de categorías dinámicas -->
+          </select>
+        </div>
         <div id="graficosIndividuales"></div>
       </div>
+      
 
-      <div id="graficosContainer" class="grafico">
-        <h4>Comparación de Predicciones vs Valores Históricos - Grupo01 hasta Grupo04</h4>
 
-        
-
+      <div class="grafico">
+        <h4>
+          Comparación de Predicciones vs Valores Históricos - Grupo01 hasta
+          Grupo04
+        </h4>
+        <div class="d-flex align-items-center mb-3">
+          <label for="filterCategory2" class="me-2"
+            >Filtrar por Categoría:</label
+          >
+          <select id="filterCategory2" class="form-select form-select-sm w-auto">
+            <option value="all">Todas</option>
+            <!-- Opciones de categorías dinámicas -->
+          </select>
+        </div>
+        <div id="graficosContainer"></div>
       </div>
-    </div>
 
+      
+    </div>
   </body>
 </html>
