@@ -78,12 +78,12 @@ Promise.all([
       data: {
         datasets: [
           {
-            label: 'Valores Reales vs Predichos',
+            label: 'Valores Predichos',
             data: valoresReales.map((x, i) => ({ x, y: valoresPredichos[i] })),
             backgroundColor: 'rgba(75, 192, 192, 1)',
           },
           {
-            label: 'Línea de Igualdad',
+            label: 'Valores Reales',
             data: [
               { x: Math.min(...valoresReales), y: Math.min(...valoresReales) },
               { x: Math.max(...valoresReales), y: Math.max(...valoresReales) },
