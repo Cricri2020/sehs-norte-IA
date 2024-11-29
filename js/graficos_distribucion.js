@@ -56,7 +56,7 @@ Promise.all([
           responsive: true,
           plugins: {
             legend: { position: 'top' },
-            title: { display: true, text: `Promedio - Categoría: ${categoria}` },
+            title: { display: true, text: `Promedio - Categoría: ${categoria}`, font: { size: 18 }, },
           },
           scales: {
             x: { title: { display: true, text: 'Fecha' } },
@@ -99,7 +99,7 @@ Promise.all([
         responsive: true,
         plugins: {
           legend: { position: 'top' },
-          title: { display: true, text: 'Valores Reales vs Predichos (Dispersión)' },
+          title: { display: true, text: 'Valores Reales vs Predichos (Dispersión)', font: { size: 18 }, },
         },
         scales: {
           x: { title: { display: true, text: 'Valores Reales' } },
@@ -134,7 +134,7 @@ Promise.all([
         responsive: true,
         plugins: {
           legend: { position: 'top' },
-          title: { display: true, text: 'Comparación de Valores Reales y Predichos (Líneas)' },
+          title: { display: true, text: 'Comparación de Valores Reales y Predichos (Líneas)', font: { size: 18 }, },
         },
         scales: {
           x: { title: { display: true, text: 'Índice' } },

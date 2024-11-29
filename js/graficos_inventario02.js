@@ -114,7 +114,7 @@ function inicializarGraficosI02() {
       data: {
         datasets: [
           {
-            label: "Valores Reales vs Predichos",
+            label: "Valores Predichos",
             data: data.real_values.map((value, index) => ({
               x: value,
               y: data.predicted_values[index],
@@ -124,7 +124,7 @@ function inicializarGraficosI02() {
             borderWidth: 1,
           },
           {
-            label: "Línea de Igualdad",
+            label: "Valores Reales",
             data: data.real_values.map((value) => ({
               x: value,
               y: value,
