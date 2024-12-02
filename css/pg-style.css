@@ -44,3 +44,17 @@ body {
   background: #e9f0f7;
   box-shadow: 24px 24px 48px #d4dae1, -24px -24px 48px #feffff;
 }
+
+.custom-card {
+  background-color: transparent;
+  border: none;
+}
+
+.custom-card-header {
+  background-color: transparent;
+  border: none;
+}
+
+.custom-list-group .list-group-item {
+  background-color: transparent;
+}
