@@ -5,98 +5,171 @@ function cargarInventario02(url) {
 }
 
 function inicializarGraficosI02() {
-  // Función para crear un gráfico
-  function crearGrafico(
-    canvasId,
-    fechas,
-    valoresHistoricos,
-    valoresPredicciones
-  ) {
-    const ctx = document.getElementById(canvasId).getContext("2d");
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: fechas,
-        datasets: [
-          {
-            label: "Datos Históricos",
-            data: valoresHistoricos,
-            borderColor: "blue",
-            fill: false,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: "Fecha",
+  const campos = [
+    "SEHS_ANOP",
+    "SEHS APCE",
+    "SEHS MICOP",
+    "SEHS MNO",
+    "SEHS MPN",
+    "SEHS-CENTRAL",
+  ];
+  
+  const chartsContainer = document.getElementById("charts-container");
+  const campoFilter = document.getElementById("campoFilter");
+  
+  let charts = []; // Para almacenar instancias de gráficos
+  
+  // Función para destruir gráficos existentes
+  function limpiarGraficos() {
+    charts.forEach((chart) => chart.destroy());
+    charts = [];
+    chartsContainer.innerHTML = ""; // Limpiar el contenedor
+  }
+  
+  // Función para crear un gráfico con filtrado de fecha
+  function crearGrafico(campo, fechas, valoresHistoricos) {
+    const divGrafico = document.createElement("div");
+    divGrafico.classList.add("mb-5");
+  
+    const chartTitle = document.createElement("h4");
+    chartTitle.innerText = `Cantidad de productos inventariados - Campo: ${campo}`;
+    chartTitle.style.textAlign = "center"; // Opcional: Centrar el texto del título
+    chartTitle.style.marginBottom = "1rem"; // Opcional: Espaciado debajo del título
+  
+    const labelFecha = document.createElement("label");
+    labelFecha.textContent = `Filtrar Año - ${campo}: `;
+    labelFecha.classList.add("me-2");
+  
+    const selectAno = document.createElement("select");
+    selectAno.classList.add("form-select", "form-select-sm", "w-auto", "mb-3");
+  
+    const anosUnicos = [
+      "all", // Opción para todos los años
+      ...new Set(fechas.map((fecha) => fecha.split("-")[0])),
+    ];
+  
+    anosUnicos.forEach((ano) => {
+      const option = document.createElement("option");
+      option.value = ano;
+      option.textContent = ano === "all" ? "Todos los años" : ano;
+      selectAno.appendChild(option);
+    });
+  
+    const canvas = document.createElement("canvas");
+    canvas.style.marginBottom = "8vh";
+  
+    // Añadir elementos al contenedor del gráfico
+    divGrafico.appendChild(chartTitle);
+    divGrafico.appendChild(labelFecha);
+    divGrafico.appendChild(selectAno);
+    divGrafico.appendChild(canvas);
+    chartsContainer.appendChild(divGrafico);
+  
+    const ctx = canvas.getContext("2d");
+    let chartInstance = null;
+  
+    const renderChart = (anoSeleccionado) => {
+      if (chartInstance) chartInstance.destroy(); // Destruir gráfico previo
+  
+      let fechasFiltradas = fechas;
+      let valoresFiltrados = valoresHistoricos;
+  
+      if (anoSeleccionado !== "all") {
+        fechasFiltradas = fechas.filter((fecha) => fecha.startsWith(anoSeleccionado));
+        valoresFiltrados = valoresHistoricos.slice(0, fechasFiltradas.length);
+      }
+  
+      chartInstance = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: fechasFiltradas,
+          datasets: [
+            {
+              label: "Datos Históricos",
+              data: valoresFiltrados,
+              borderColor: "blue",
+              fill: false,
             },
-          },
-          y: {
-            title: {
-              display: true,
-              text: "Cantidad de Productos",
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Fecha",
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Cantidad de Productos",
+              },
             },
           },
         },
-      },
+      });
+  
+      charts.push(chartInstance); // Guardar referencia del gráfico
+    };
+  
+    renderChart("all");
+  
+    selectAno.addEventListener("change", () => {
+      const anoSeleccionado = selectAno.value;
+      renderChart(anoSeleccionado);
     });
   }
-
-  // Función para cargar los datos desde los archivos JSON y generar los gráficos
-  async function cargarYGenerarGraficos() {
-    const campos = [
-      "SEHS_ANOP",
-      "SEHS APCE",
-      "SEHS MICOP",
-      "SEHS MNO",
-      "SEHS MPN",
-      "SEHS-CENTRAL",
-    ];
-
-    // Recorrer las categorías y cargar sus datos
-    for (const campo of campos) {
+  
+  
+  // Función para cargar datos y generar gráficos
+  async function cargarYGenerarGraficos(campoSeleccionado = "all") {
+    limpiarGraficos();
+  
+    const camposFiltrados =
+      campoSeleccionado === "all" ? campos : [campoSeleccionado];
+  
+    for (const campo of camposFiltrados) {
       const historicoUrl = `json/inventario02/historico_${campo}.json`;
-      const prediccionesUrl = `json/inventario02/predicciones_${campo}.json`;
-
-      // Cargar los archivos JSON para los datos históricos y las predicciones
-      const [historicoResponse, prediccionesResponse] = await Promise.all([
-        fetch(historicoUrl),
-        fetch(prediccionesUrl),
-      ]);
-
-      const historicoData = await historicoResponse.json();
-      const prediccionesData = await prediccionesResponse.json();
-
-      // Crear un contenedor para cada gráfico
-      const chartContainer = document.createElement("div");
-      chartContainer.style.marginBottom = "8vh";
-      const chartTitle = document.createElement("h4");
-      chartTitle.innerText = `Cantidad de productos inventariados - Campo: ${campo}`;
-      chartContainer.appendChild(chartTitle);
-      const canvas = document.createElement("canvas");
-      canvas.id = `chart_${campo}`;
-      canvas.width = 600;
-      canvas.height = 400;
-      chartContainer.appendChild(canvas);
-      document.getElementById("charts-container").appendChild(chartContainer);
-
-      // Crear el gráfico utilizando los datos
-      crearGrafico(
-        `chart_${campo}`,
-        historicoData.fechas,
-        historicoData.valores,
-        prediccionesData.valores
-      );
+  
+      try {
+        const response = await fetch(historicoUrl);
+        const data = await response.json();
+  
+        crearGrafico(campo, data.fechas, data.valores);
+      } catch (error) {
+        console.error(`Error al cargar datos de ${campo}:`, error);
+      }
     }
   }
-
-  // Llamar a la función para cargar los datos y generar los gráficos al cargar la página
-  cargarYGenerarGraficos();
+  
+  // Inicializar la página
+  function init() {
+    // Agregar opciones al filtro de campos
+    const optionTodos = document.createElement("option");
+    optionTodos.value = "all";
+    optionTodos.textContent = "Todos los Campos";
+    campoFilter.appendChild(optionTodos);
+  
+    campos.forEach((campo) => {
+      const option = document.createElement("option");
+      option.value = campo;
+      option.textContent = campo;
+      campoFilter.appendChild(option);
+    });
+  
+    campoFilter.addEventListener("change", (event) => {
+      const campoSeleccionado = event.target.value;
+      cargarYGenerarGraficos(campoSeleccionado);
+    });
+  
+    cargarYGenerarGraficos(); // Cargar gráficos iniciales
+  }
+  
+  init();
+  
 
   // Función para cargar los datos desde el archivo JSON
   async function fetchData() {

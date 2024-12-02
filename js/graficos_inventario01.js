@@ -5,151 +5,313 @@ function cargarInventario01(url) {
 }
 
 function inicializarGraficosI01() {
-  const categorias = ["Grupo1", "Grupo2", "Grupo3", "Grupo4"]; 
+  const categorias = ["Grupo1", "Grupo2", "Grupo3", "Grupo4"]; // Definir los grupos
   const graficosContainer = document.getElementById("graficosContainer");
+  const filterCategory = document.getElementById("filterCategory");
 
-  // Función para cargar los datos JSON y graficar
-  categorias.forEach((categoria) => {
-    const filePath = `json/inventario01/prediccionesvsreales/datos_${categoria}.json`;
+  // Función para renderizar gráficos según el filtro seleccionado
+  const renderGraficos = (filtro = "all") => {
+    graficosContainer.innerHTML = ""; // Limpiar gráficos existentes
 
-    fetch(filePath)
-      .then((response) => response.json())
-      .then((data) => {
-        const canvas = document.createElement("canvas");
-        canvas.style.marginBottom = "8vh";
-        graficosContainer.appendChild(canvas);
+    const categoriasFiltradas =
+      filtro === "all"
+        ? categorias
+        : categorias.filter((categoria) => categoria === filtro);
 
-        const ctx = canvas.getContext("2d");
+    categoriasFiltradas.forEach((categoria) => {
+      const filePath = `json/inventario01/prediccionesvsreales/datos_${categoria}.json`;
 
-        new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: data.Años,
-            datasets: [
-              {
-                label: `Valores Históricos - ${categoria}`,
-                data: data.Valores_Reales,
-                borderColor: "blue",
-                fill: false,
-                tension: 0.4,
-              },
-              {
-                label: `Predicciones - ${categoria}`,
-                data: data.Predicciones,
-                borderColor: "orange",
-                borderDash: [5, 5],
-                fill: false,
-                tension: 0.4,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { display: true },
-              title: {
-                display: true,
-                text: `Comparación de Predicciones vs Valores Históricos - ${categoria}`,
-                font: { size: 18 },
-              },
+      fetch(filePath)
+        .then((response) => response.json())
+        .then((data) => {
+          const canvas = document.createElement("canvas");
+          canvas.style.marginBottom = "8vh";
+          graficosContainer.appendChild(canvas);
+
+          const ctx = canvas.getContext("2d");
+
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: data.Años,
+              datasets: [
+                {
+                  label: `Valores Históricos - ${categoria}`,
+                  data: data.Valores_Reales,
+                  borderColor: "blue",
+                  fill: false,
+                  tension: 0.4,
+                },
+                {
+                  label: `Predicciones - ${categoria}`,
+                  data: data.Predicciones,
+                  borderColor: "orange",
+                  borderDash: [5, 5],
+                  fill: false,
+                  tension: 0.4,
+                },
+              ],
             },
-            scales: {
-              x: {
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: true },
                 title: {
                   display: true,
-                  text: "Año",
+                  text: `Comparación de Predicciones vs Valores Históricos - ${categoria}`,
+                  font: { size: 18 },
                 },
               },
-              y: {
-                title: {
-                  display: true,
-                  text: "Cantidad de Productos",
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: "Año",
+                  },
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: "Cantidad de Productos",
+                  },
                 },
               },
             },
-          },
-        });
-      })
-      .catch((error) =>
-        console.error(`Error cargando datos para ${categoria}:`, error)
-      );
-  });
+          });
+        })
+        .catch((error) =>
+          console.error(`Error cargando datos para ${categoria}:`, error)
+        );
+    });
+  };
 
-  // Lista de categorías y archivos JSON generados previamente
-  const categorias2 = ["Grupo1", "Grupo2", "Grupo3", "Grupo4"]; 
+  // Función para cargar opciones en el filtro
+  const cargarCategorias = () => {
+    categorias.forEach((categoria) => {
+      const option = document.createElement("option");
+      option.value = categoria;
+      option.textContent = categoria; // Texto del grupo
+      filterCategory.appendChild(option);
+    });
+  };
+
+  // Inicializar la interfaz
+  const init = () => {
+    cargarCategorias(); // Cargar las opciones del filtro dinámicamente
+    renderGraficos(); // Renderizar todos los gráficos por defecto
+
+    // Evento para filtrar gráficos por categoría
+    filterCategory.addEventListener("change", (event) => {
+      const selectedCategory = event.target.value;
+      renderGraficos(selectedCategory);
+    });
+  };
+
+  // Llamar a la función de inicialización
+  init();
+
+  const categorias2 = ["Grupo1", "Grupo2", "Grupo3", "Grupo4"];
   const graficosContainer2 = document.getElementById("graficosContainer2");
+  const filterCategory2 = document.getElementById("filterCategory2");
 
-  // Función para cargar los datos JSON y graficar
-  categorias2.forEach((categoria) => {
-    const filePath = `json/inventario01/historicosypredicciones/${categoria}_data.json`; 
+  let charts2 = []; // Mantener referencia de gráficos activos
 
-    fetch(filePath)
-      .then((response) => response.json())
-      .then((data) => {
-        const canvas = document.createElement("canvas");
-        canvas.style.marginBottom = "8vh";
-        graficosContainer2.appendChild(canvas);
+  const renderGraficos2 = (filtroCategoria = "all") => {
+    graficosContainer2.innerHTML = ""; // Limpiar gráficos existentes
+    charts2.forEach((chart) => chart.destroy()); // Destruir gráficos existentes
+    charts2 = []; // Resetear referencia de gráficos
 
-        const ctx = canvas.getContext("2d");
+    const categoriasFiltradas =
+      filtroCategoria === "all"
+        ? categorias2
+        : categorias2.filter((categoria) => categoria === filtroCategoria);
 
-        // Reducir los datos históricos aún más, solo tomar uno de cada 20 datos
-        const numDatosHistoricos = 150; // Número de puntos históricos a mostrar
-        const step = Math.floor(
-          data.historico.fechas.length / numDatosHistoricos
-        );
-        const datosHistoricosReducidos = data.historico.fechas.filter(
-          (_, index) => index % step === 0
-        );
-        const valoresHistoricosReducidos = data.historico.valores.filter(
-          (_, index) => index % step === 0
-        );
+    categoriasFiltradas.forEach((categoria) => {
+      const filePath = `json/inventario01/historicosypredicciones/${categoria}_data.json`;
 
-        // Crear el gráfico
-        new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: [...datosHistoricosReducidos, ...data.predicciones.fechas],
-            datasets: [
-              {
-                label: `Históricos - ${categoria}`,
-                data: valoresHistoricosReducidos,
-                borderColor: "rgba(54, 162, 235, 1)",
-                backgroundColor: "rgba(54, 162, 235, 0.2)",
-                tension: 0.4,
-                fill: true,
+      fetch(filePath)
+        .then((response) => response.json())
+        .then((data) => {
+          const divGrafico = document.createElement("div");
+          divGrafico.classList.add("mb-5");
+
+          const labelFecha = document.createElement("label");
+          labelFecha.textContent = `Filtrar Año - ${categoria}: `;
+          labelFecha.classList.add("me-2");
+
+          const selectAno = document.createElement("select");
+          selectAno.classList.add(
+            "form-select",
+            "form-select-sm",
+            "w-auto",
+            "mb-3"
+          );
+
+          const numDatosHistoricos = 150;
+          const step = Math.floor(
+            data.historico.fechas.length / numDatosHistoricos
+          );
+          const fechasHistoricasReducidas = data.historico.fechas.filter(
+            (_, index) => index % step === 0
+          );
+          const valoresHistoricosReducidos = data.historico.valores.filter(
+            (_, index) => index % step === 0
+          );
+
+          const anosUnicos = [
+            "all", // Opción para todos los años
+            ...new Set([
+              ...fechasHistoricasReducidas.map((fecha) => fecha.split("-")[0]),
+              ...data.predicciones.fechas.map((fecha) => fecha.split("-")[0]),
+            ]),
+          ];
+
+          anosUnicos.forEach((ano) => {
+            const option = document.createElement("option");
+            option.value = ano;
+            option.textContent = ano === "all" ? "Todos los años" : ano;
+            selectAno.appendChild(option);
+          });
+
+          const canvas = document.createElement("canvas");
+          canvas.style.marginBottom = "8vh";
+
+          divGrafico.appendChild(labelFecha);
+          divGrafico.appendChild(selectAno);
+          divGrafico.appendChild(canvas);
+          graficosContainer2.appendChild(divGrafico);
+
+          const ctx = canvas.getContext("2d");
+          let chartInstance = null;
+
+          const renderChart = (anoSeleccionado) => {
+            if (chartInstance) chartInstance.destroy(); // Destruir gráfico previo
+
+            let fechasFiltradasHistoricas = fechasHistoricasReducidas;
+            let valoresFiltradosHistoricos = valoresHistoricosReducidos;
+            let fechasFiltradasPredicciones = data.predicciones.fechas;
+            let valoresFiltradosPredicciones = data.predicciones.valores;
+
+            if (anoSeleccionado !== "all") {
+              fechasFiltradasHistoricas = fechasHistoricasReducidas.filter(
+                (fecha) => fecha.startsWith(anoSeleccionado)
+              );
+              valoresFiltradosHistoricos = valoresHistoricosReducidos.slice(
+                0,
+                fechasFiltradasHistoricas.length
+              );
+
+              fechasFiltradasPredicciones = data.predicciones.fechas.filter(
+                (fecha) => fecha.startsWith(anoSeleccionado)
+              );
+              valoresFiltradosPredicciones = data.predicciones.valores.slice(
+                0,
+                fechasFiltradasPredicciones.length
+              );
+            }
+
+            // Concatenar las fechas y valores para "Todos los años" (incluir predicciones de 2024)
+            const fechasTotales =
+              anoSeleccionado === "all"
+                ? [...fechasFiltradasHistoricas, ...data.predicciones.fechas]
+                : [
+                    ...fechasFiltradasHistoricas,
+                    ...fechasFiltradasPredicciones,
+                  ];
+
+            const valoresTotalesHistoricos =
+              anoSeleccionado === "all"
+                ? valoresFiltradosHistoricos
+                : valoresFiltradosHistoricos;
+
+            const valoresTotalesPredicciones =
+              anoSeleccionado === "all"
+                ? Array(valoresFiltradosHistoricos.length)
+                    .fill(null)
+                    .concat(data.predicciones.valores)
+                : Array(valoresFiltradosHistoricos.length)
+                    .fill(null)
+                    .concat(valoresFiltradosPredicciones);
+
+            chartInstance = new Chart(ctx, {
+              type: "line",
+              data: {
+                labels: fechasTotales,
+                datasets: [
+                  {
+                    label: `Históricos - ${categoria}`,
+                    data: valoresTotalesHistoricos,
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    tension: 0.4,
+                    fill: true,
+                  },
+                  {
+                    label: `Predicción - ${categoria}`,
+                    data: valoresTotalesPredicciones,
+                    borderColor: "rgba(255, 99, 132, 1)",
+                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    fill: false,
+                  },
+                ],
               },
-              {
-                label: `Predicción - ${categoria}`,
-                data: Array(datosHistoricosReducidos.length)
-                  .fill(null)
-                  .concat(data.predicciones.valores), 
-                borderColor: "rgba(255, 99, 132, 1)",
-                backgroundColor: "rgba(255, 99, 132, 0.2)",
-                borderDash: [5, 5],
-                tension: 0.4,
-                fill: false,
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: { display: true },
+                  title: {
+                    display: true,
+                    text: `Histórico y Predicciones para ${categoria}${
+                      anoSeleccionado !== "all"
+                        ? ` - Año ${anoSeleccionado}`
+                        : ""
+                    }`,
+                    font: { size: 18 },
+                  },
+                },
+                scales: {
+                  x: { title: { display: true, text: "Fecha" } },
+                  y: { title: { display: true, text: "Cantidad" } },
+                },
               },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { display: true },
-              title: {
-                display: true,
-                text: `Histórico y Predicciones 2024 para ${categoria}`,
-                font: { size: 18 },
-              },
-            },
-            scales: {
-              x: { title: { display: true, text: "Fecha" } },
-              y: { title: { display: true, text: "Cantidad" } },
-            },
-          },
-        });
-      })
-      .catch((error) =>
-        console.error(`Error al cargar el JSON de ${categoria}:`, error)
-      );
-  });
+            });
+
+            charts2.push(chartInstance); // Guardar instancia del gráfico
+          };
+
+          renderChart("all");
+
+          selectAno.addEventListener("change", () => {
+            const anoSeleccionado = selectAno.value;
+            renderChart(anoSeleccionado);
+          });
+        })
+        .catch((error) =>
+          console.error(`Error al cargar el JSON de ${categoria}:`, error)
+        );
+    });
+  };
+
+  const cargarCategorias2 = () => {
+    categorias2.forEach((categoria) => {
+      const option = document.createElement("option");
+      option.value = categoria;
+      option.textContent = categoria;
+      filterCategory2.appendChild(option);
+    });
+  };
+
+  const init2 = () => {
+    cargarCategorias2();
+    renderGraficos2();
+
+    filterCategory2.addEventListener("change", (event) => {
+      const selectedCategory = event.target.value;
+      renderGraficos2(selectedCategory);
+    });
+  };
+
+  init2();
 }

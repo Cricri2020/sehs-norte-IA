@@ -11,12 +11,28 @@
     <h1 class="title">Promedio de los niveles de inventario esperados en tienda</h1>
 
     <div class="contenido">
-        <div id="graficosContainer" class="grafico">
+        
+          
+        <div class="grafico">
             <h4 class="mb-3">Comparación de Predicciones vs Valores Históricos - Grupo1 hasta Grupo4</h4>
+            <div class="d-flex align-items-center mb-3">
+                <label for="filterCategory" class="me-2">Filtrar por Grupo:</label>
+                <select id="filterCategory" class="form-select form-select-sm w-auto">
+                  <option value="all">Todos</option>
+                </select>
+              </div>
+              <div id="graficosContainer"></div>
         </div>
 
-        <div id="graficosContainer2" class="grafico">
+        <div class="grafico">
             <h4 class="mb-3">Histórico y Predicciones 2024 - Grupo01 hasta Grupo04</h4>
+            <div class="d-flex align-items-center mb-3">
+                <label for="filterCategory2" class="me-2">Filtrar por Grupo:</label>
+                <select id="filterCategory2" class="form-select form-select-sm w-auto">
+                  <option value="all">Todos</option>
+                </select>
+              </div>
+              <div id="graficosContainer2"></div>
         </div>
     </div>
 

@@ -11,11 +11,17 @@
     <h1 class="title">Porcentaje de rotación del inventario en almacén</h1>
 
     <div class="contenido">
-      <div id="charts-container" class="grafico"></div>
+      <div class="grafico">
+        <div class="d-flex align-items-center mb-4">
+          <label for="campoFilter" class="mr-2">Filtrar por Campo:</label>
+          <select id="campoFilter" class="form-select w-auto"></select>
+        </div>
+        <div id="charts-container"></div>
+      </div>
       <div class="grafico">
         <h4>Valores Históricos vs Predicciones</h4>
         <canvas id="scatterChart"></canvas>
-    </div>
+      </div>
       <div class="grafico">
         <h4>Comparación de Valores Históricos y Predicciones</h4>
         <canvas id="trendChart"></canvas>
