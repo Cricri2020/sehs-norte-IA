@@ -5,7 +5,7 @@ function cargarInventario01(url) {
 }
 
 function inicializarGraficosI01() {
-  const categorias = ["Grupo1", "Grupo2", "Grupo3", "Grupo4"]; // Definir los grupos
+  const categorias = ["Lote de envio 1", "Lote de envio 2", "Lote de envio 3", "Lote de envio 4"]; // Definir los grupos
   const graficosContainer = document.getElementById("graficosContainer");
   const filterCategory = document.getElementById("filterCategory");
 
@@ -110,7 +110,6 @@ function inicializarGraficosI01() {
   // Llamar a la función de inicialización
   init();
 
-  const categorias2 = ["Grupo1", "Grupo2", "Grupo3", "Grupo4"];
   const graficosContainer2 = document.getElementById("graficosContainer2");
   const filterCategory2 = document.getElementById("filterCategory2");
 
@@ -123,8 +122,8 @@ function inicializarGraficosI01() {
 
     const categoriasFiltradas =
       filtroCategoria === "all"
-        ? categorias2
-        : categorias2.filter((categoria) => categoria === filtroCategoria);
+        ? categorias
+        : categorias.filter((categoria) => categoria === filtroCategoria);
 
     categoriasFiltradas.forEach((categoria) => {
       const filePath = `json/inventario01/historicosypredicciones/${categoria}_data.json`;
@@ -295,7 +294,7 @@ function inicializarGraficosI01() {
   };
 
   const cargarCategorias2 = () => {
-    categorias2.forEach((categoria) => {
+    categorias.forEach((categoria) => {
       const option = document.createElement("option");
       option.value = categoria;
       option.textContent = categoria;

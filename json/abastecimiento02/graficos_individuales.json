@@ -1,6 +1,6 @@
 [
     {
-        "Categoria": "Grupo1",
+        "Categoria": "Lote de envio 1",
         "Historicos": {
             "A\u00f1o": [
                 2016,
@@ -29,7 +29,7 @@
         }
     },
     {
-        "Categoria": "Grupo2",
+        "Categoria": "Lote de envio 2",
         "Historicos": {
             "A\u00f1o": [
                 2016,
@@ -58,7 +58,7 @@
         }
     },
     {
-        "Categoria": "Grupo3",
+        "Categoria": "Lote de envio 3",
         "Historicos": {
             "A\u00f1o": [
                 2016,
@@ -87,7 +87,7 @@
         }
     },
     {
-        "Categoria": "Grupo4",
+        "Categoria": "Lote de envio 4",
         "Historicos": {
             "A\u00f1o": [
                 2016,

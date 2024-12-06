@@ -32,7 +32,7 @@ function inicializarGraficosA2() {
             legend: { display: false },
             title: {
               display: true,
-              text: "Predicción de Costo Promedio por Categoría para 2024",
+              text: "Predicción de Costo Promedio por Lote de envío para 2024",
               font: { size: 18 },
             },
           },
@@ -158,7 +158,7 @@ function inicializarGraficosA2() {
     );
 
   // Lista de categorías y archivos JSON generados previamente
-  const categorias = ["Grupo1", "Grupo2", "Grupo3", "Grupo4"]; // Actualizar con los nombres reales
+  const categorias = ["Lote de envio 1", "Lote de envio 2", "Lote de envio 3", "Lote de envio 4"]; // Actualizar con los nombres reales
   const graficosContainer = document.getElementById("graficosContainer");
   const filterCategory2 = document.getElementById("filterCategory2");
   // Función para cargar las opciones del select dinámicamente
