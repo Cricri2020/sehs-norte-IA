@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <title>Costo transporte</title>
     <link rel="stylesheet" href="../../css/pg-style.css" />
   </head>
@@ -14,8 +15,33 @@
     <div class="contenido">
       <div id="categorias" class="grafico">
         <div id="graficosContainer"></div>
+        <canvas id="divisionChart" class="w-50 h-50 m-auto"></canvas>
       </div>
+      <div class="grafico">
+        <h2>Gráficos de Optimización</h2>
 
+        <canvas id="xgboost_n_estimators" class="mb-5"></canvas>
+        <canvas id="xgboost_max_depth" class="mb-5"></canvas>
+        <canvas id="xgboost_learning_rate" class="mb-5"></canvas>
+        
+        <!-- CatBoost Charts -->
+        <canvas id="catboost_iterations" class="mb-5"></canvas>
+        <canvas id="catboost_depth" class="mb-5"></canvas>
+        <canvas id="catboost_learning_rate" class="mb-5"></canvas>
+        
+        <!-- SVR Charts -->
+        <canvas id="svr_c" class="mb-5"></canvas>
+        <canvas id="svr_gamma" class="mb-5"></canvas>
+      </div>
+      <div class="grafico">
+        <h2>Gráficos de Métricas</h>
+        <div id="baseModelsContainer"></div>
+        <canvas id="metaModelChart"class="mb-5"></canvas>
+      </div>
+      <div class="grafico">
+        <h2>Gráfico de Datos Originales y Predicciones</h2>
+        <canvas id="predictionChart"></canvas>
+      </div>
       <div id="reales-vs-predichos" class="grafico">
         <h4>Comparación Valores Históricos vs Predicciones</h4>
         <canvas id="scatterChart"></canvas>

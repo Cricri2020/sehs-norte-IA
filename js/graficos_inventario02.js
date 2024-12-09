@@ -5,38 +5,6 @@ function cargarInventario02(url) {
 }
 
 function inicializarGraficosI02() {
-  const data = {
-    labels: ["Entrenamiento", "Prueba"],
-    datasets: [
-      {
-        data: [79.9, 20.1], // Porcentajes
-        backgroundColor: ["#7ec8e3", "#99edc3"], // Colores para cada sección
-        hoverBackgroundColor: ["#61b3d6", "#79e0a9"], // Colores al pasar el mouse
-      },
-    ],
-  };
-  // Configuración del gráfico
-  const config = {
-    type: "pie",
-    data: data,
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: "bottom", // Posición de la leyenda
-        },
-        title: {
-          display: true,
-          text: "Distribución de datos: Entrenamiento vs Prueba",
-          font: { size: 18 },
-        },
-      },
-    },
-  };
-  // Crear el gráfico
-  const ctx = document.getElementById("pieChart").getContext("2d");
-  const pieChart = new Chart(ctx, config);
-
   const campos = [
     "SEHS_ANOP",
     "SEHS APCE",
@@ -583,4 +551,42 @@ function inicializarGraficosI02() {
       });
     })
     .catch((error) => console.error("Error al cargar el JSON:", error));
+
+  //Gráfico de pie
+  fetch("json/inventario02/division_data_random.json")
+  .then((response) => response.json())
+  .then((data) => {
+    const ctx = document.getElementById("divisionChartRandom").getContext("2d");
+
+    const chart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: data.division.labels,
+        datasets: [
+          {
+            data: data.division.sizes,
+            backgroundColor: ["skyblue", "lightgreen"],
+            hoverOffset: 4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          title: {
+            display: true,
+            text: "Distribución de datos: Entrenamiento vs Prueba",
+            font: { size: 18 },
+          },
+        },
+      },
+    });
+  })
+  .catch((error) =>
+    console.error("Error al cargar el JSON para la división:", error)
+  );
+
 }

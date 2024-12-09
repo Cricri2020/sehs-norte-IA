@@ -237,4 +237,335 @@ function inicializarGraficosD() {
       },
     });
   }
+
+  //Gráficos de optimización
+  function createLineChart(canvasId, chartData, color) {
+    const ctx = document.getElementById(canvasId).getContext("2d");
+
+    // Ordenar los valores de x y sus valores correspondientes de y
+    const sortedData = chartData.x_values
+      .map((x, index) => ({ x: x, y: chartData.y_values[index] }))
+      .sort((a, b) => a.x - b.x); // Asegúrate de que x sea numérico; ajusta si es string.
+
+    const sortedX = sortedData.map((item) => item.x);
+    const sortedY = sortedData.map((item) => item.y);
+
+    // Crear un degradado para el fondo
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(1, "rgba(255,255,255,0.1)");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: sortedX.map(String),
+        datasets: [
+          {
+            label: chartData.y_label,
+            data: sortedY,
+            borderColor: color,
+            backgroundColor: gradient,
+            borderWidth: 2,
+            pointBackgroundColor: color,
+            pointBorderColor: color,
+            tension: 0.4,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: chartData.title,
+            font: { size: 18 },
+          },
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: chartData.x_label,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: chartData.y_label,
+            },
+            beginAtZero: false,
+          },
+        },
+        elements: {
+          point: {
+            radius: 5,
+            hoverRadius: 7,
+          },
+        },
+      },
+    });
+  }
+  fetch("json/distribucion/hyperparameter_results.json")
+    .then((response) => response.json())
+    .then((data) => {
+      // Color palette
+      const colors = {
+        xgboost: "rgba(255, 99, 132, 0.7)",
+        catboost: "rgba(54, 162, 235, 0.7)",
+        svr: "rgba(255, 206, 86, 0.7)",
+      };
+
+      // XGBoost Charts
+      createLineChart(
+        "xgboost_n_estimators",
+        data.xgboost.n_estimators,
+        colors.xgboost
+      );
+      createLineChart(
+        "xgboost_max_depth",
+        data.xgboost.max_depth,
+        colors.xgboost
+      );
+      createLineChart(
+        "xgboost_learning_rate",
+        data.xgboost.learning_rate,
+        colors.xgboost
+      );
+
+      // CatBoost Charts
+      createLineChart(
+        "catboost_iterations",
+        data.catboost.iterations,
+        colors.catboost
+      );
+      createLineChart("catboost_depth", data.catboost.depth, colors.catboost);
+      createLineChart(
+        "catboost_learning_rate",
+        data.catboost.learning_rate,
+        colors.catboost
+      );
+
+      // SVR Charts
+      createLineChart("svr_c", data.svr.C, colors.svr);
+      createLineChart("svr_gamma", data.svr.gamma, colors.svr);
+    })
+    .catch((error) => console.error("Error loading the JSON:", error));
+
+  //Gráficos de métricas
+  fetch("json/distribucion/metrics.json")
+    .then((response) => response.json())
+    .then((data) => {
+      // Datos para los modelos base
+      const baseMetrics = data.model_metrics;
+      const baseLabels = Object.keys(baseMetrics); // Nombres de los modelos
+      const metrics = Object.keys(baseMetrics[baseLabels[0]]); // Tipos de métricas
+
+      // Generar gráficos para cada métrica
+      metrics.forEach((metric) => {
+        // Crear un canvas dinámicamente para cada gráfico
+        const canvas = document.createElement("canvas");
+        canvas.width = 400;
+        canvas.height = 200;
+        document.getElementById("baseModelsContainer").appendChild(canvas);
+
+        // Obtener los valores de cada modelo para esta métrica
+        const values = baseLabels.map((model) => baseMetrics[model][metric]);
+
+        // Crear el gráfico
+        new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: baseLabels,
+            datasets: [
+              {
+                label: metric,
+                data: values,
+                backgroundColor: "rgba(54, 162, 235, 0.7)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text: `Métrica: ${metric}`,
+              },
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      });
+
+      // Datos para el meta-modelo
+      const metaMetrics = data.meta_metrics;
+      const metaLabels = Object.keys(metaMetrics);
+      const metaValues = metaLabels.map((metric) => metaMetrics[metric]);
+
+      // Crear el gráfico del meta-modelo
+      new Chart(document.getElementById("metaModelChart"), {
+        type: "bar",
+        data: {
+          labels: metaLabels,
+          datasets: [
+            {
+              label: "Meta-modelo",
+              data: metaValues,
+              backgroundColor: "rgba(255, 99, 132, 0.7)",
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Métricas del Meta-modelo",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    });
+
+  //Gráfico de Predicciones para 2024
+  fetch("json/distribucion/data_historica_predicciones.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const ctx = document.getElementById("predictionChart").getContext("2d");
+
+      // Última fecha de los datos históricos
+      const lastHistoricalDate = new Date(
+        Math.max(...data.historical.fecha.map((date) => new Date(date)))
+      );
+
+      // Filtrar predicciones que ocurran después de los históricos
+      const filteredPredictions = data.predictions.fecha
+        .map((fecha, index) => ({
+          fecha: new Date(fecha),
+          cantidad_predicha: data.predictions.cantidad_predicha[index],
+        }))
+        .filter((item) => item.fecha > lastHistoricalDate);
+
+      // Configuración del gráfico
+      const chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: data.historical.fecha.concat(
+            filteredPredictions.map(
+              (item) => item.fecha.toISOString().split("T")[0]
+            )
+          ), // Fechas combinadas
+          datasets: [
+            {
+              label: "Datos Originales",
+              data: data.historical.cantidad_real,
+              borderColor: "blue",
+              borderWidth: 2,
+              fill: false,
+              tension: 0.3,
+            },
+            {
+              label: "Predicciones 2024",
+              data: Array(data.historical.cantidad_real.length)
+                .fill(null) // Espacios vacíos para mantener alineación
+                .concat(
+                  filteredPredictions.map((item) => item.cantidad_predicha)
+                ),
+              borderColor: "red",
+              borderWidth: 2,
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+            title: {
+              display: true,
+              text: "Datos Originales y Predicciones para 2024",
+              font: { size: 18 },
+            },
+          },
+          scales: {
+            x: {
+              type: "time", // Tipo de escala de tiempo
+              time: {
+                unit: "month", // Mostrar por meses
+                tooltipFormat: "yyyy-MM-dd", // Formato en el tooltip
+              },
+              title: {
+                display: true,
+                text: "Fecha",
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Cantidad",
+              },
+            },
+          },
+        },
+      });
+    })
+    .catch((error) => console.error("Error al cargar el JSON:", error));
+
+  //Gráfico de pie
+  fetch("json/distribucion/division_data.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const ctx = document.getElementById("divisionChart").getContext("2d");
+
+      const chart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: data.division.labels,
+          datasets: [
+            {
+              data: data.division.sizes,
+              backgroundColor: ["skyblue", "lightgreen"],
+              hoverOffset: 4,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+            title: {
+              display: true,
+              text: "Distribución de datos: Entrenamiento vs Prueba",
+              font: { size: 18 },
+            },
+          },
+        },
+      });
+    })
+    .catch((error) =>
+      console.error("Error al cargar el JSON para la distribución:", error)
+    );
 }

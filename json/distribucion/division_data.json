@@ -1,0 +1,12 @@
+{
+    "division": {
+        "labels": [
+            "Entrenamiento",
+            "Prueba"
+        ],
+        "sizes": [
+            280,
+            70
+        ]
+    }
+}

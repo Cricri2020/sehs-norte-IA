@@ -1,0 +1,138 @@
+{
+    "xgboost": {
+        "n_estimators": {
+            "x_values": [
+                200,
+                50,
+                100,
+                150
+            ],
+            "y_values": [
+                0.8866183233970016,
+                0.8862684816328135,
+                0.8922949751572044,
+                0.8880540792926135
+            ],
+            "title": "Impacto de n_estimators en el desempe\u00f1o (XGBoost)",
+            "x_label": "n_estimators",
+            "y_label": "R^2 Score"
+        },
+        "max_depth": {
+            "x_values": [
+                5,
+                20,
+                10,
+                15
+            ],
+            "y_values": [
+                0.8882375250235013,
+                0.887647573961823,
+                0.8872393011209431,
+                0.892873898949754
+            ],
+            "title": "Impacto de max_depth en el desempe\u00f1o (XGBoost)",
+            "x_label": "max_depth",
+            "y_label": "R^2 Score"
+        },
+        "learning_rate": {
+            "x_values": [
+                0.2,
+                0.05,
+                0.01,
+                0.1
+            ],
+            "y_values": [
+                0.888121734804909,
+                0.8883854868803175,
+                0.8921323257198243,
+                0.881258858327703
+            ],
+            "title": "Impacto de learning_rate en el desempe\u00f1o (XGBoost)",
+            "x_label": "learning_rate",
+            "y_label": "R^2 Score"
+        }
+    },
+    "catboost": {
+        "iterations": {
+            "x_values": [
+                250,
+                100,
+                750,
+                500
+            ],
+            "y_values": [
+                0.8850827391706737,
+                0.8927875144209935,
+                0.8867226070586034,
+                0.8939395066489411
+            ],
+            "title": "Impacto de n_estimators en el desempe\u00f1o (Random Forest)",
+            "x_label": "iterations",
+            "y_label": "R^2 Score"
+        },
+        "depth": {
+            "x_values": [
+                10,
+                5
+            ],
+            "y_values": [
+                0.8875673005768773,
+                0.8894445673455864
+            ],
+            "title": "Impacto de max_depth en el desempe\u00f1o (Random Forest)",
+            "x_label": "depth",
+            "y_label": "R^2 Score"
+        },
+        "learning_rate": {
+            "x_values": [
+                0.01,
+                0.05,
+                0.1,
+                0.2
+            ],
+            "y_values": [
+                0.8915543209677411,
+                0.892326664751101,
+                0.8832332433712156,
+                0.8878182226943606
+            ],
+            "title": "Impacto de max_min_samples_split en el desempe\u00f1o (Random Forest)",
+            "x_label": "learning_rate",
+            "y_label": "R^2 Score"
+        }
+    },
+    "svr": {
+        "C": {
+            "x_values": [
+                1.0,
+                0.1,
+                10
+            ],
+            "y_values": [
+                0.8914242523984022,
+                0.893017912866583,
+                0.8832020810347541
+            ],
+            "title": "Impacto de C en el desempe\u00f1o (SVR)",
+            "x_label": "C",
+            "y_label": "R^2 Score"
+        },
+        "gamma": {
+            "x_values": [
+                1,
+                0.1,
+                0.01,
+                10
+            ],
+            "y_values": [
+                0.8865972932140065,
+                0.8949245851765193,
+                0.8892036930405928,
+                0.8880540792926135
+            ],
+            "title": "Impacto de gamma en el desempe\u00f1o (SVR)",
+            "x_label": "gamma",
+            "y_label": "R^2 Score"
+        }
+    }
+}
