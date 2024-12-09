@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <title>Rotación del inventario</title>
     <link rel="stylesheet" href="../../css/pg-style.css" />
   </head>
@@ -17,6 +18,7 @@
           <select id="campoFilter" class="form-select w-auto"></select>
         </div>
         <div id="charts-container"></div>
+        <canvas id="pieChart" class="w-50 h-50 m-auto"></canvas>
       </div>
       <div class="grafico">
         <h4>Valores Históricos vs Predicciones</h4>
@@ -25,6 +27,28 @@
       <div class="grafico">
         <h4>Comparación de Valores Históricos y Predicciones</h4>
         <canvas id="trendChart"></canvas>
+      </div>
+      <div class="grafico">
+        <h2>Gráficos de Hiperparámetros</h2>
+        <!-- Contenedores de los gráficos -->
+        <canvas id="xgb_n_estimators" class="mb-5"></canvas>
+        <canvas id="xgb_max_depth" class="mb-5"></canvas>
+        <canvas id="xgb_learning_rate" class="mb-5"></canvas>
+        <canvas id="rf_n_estimators" class="mb-5"></canvas>
+        <canvas id="rf_max_depth" class="mb-5"></canvas>
+        <canvas id="knn_n_neighbors" class="mb-5"></canvas>
+        <canvas id="knn_p" class="mb-5"></canvas>
+      </div>
+
+      <div class="grafico">
+        <h2>Métricas de los modelos base</h2>
+        <div id="baseModelsChart" ></div>
+        <canvas id="metaModelChart"></canvas>
+      </div>
+
+      <div class="grafico">
+        <h2>Datos Reales y Predicciones para el 2024</h2>
+        <canvas id="chart" width="800" height="400"></canvas>
       </div>
     </div>
   </body>
