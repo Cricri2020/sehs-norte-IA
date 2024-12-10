@@ -1,40 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Niveles de inventario</title>
-    <link rel="stylesheet" href="../../css/pg-style.css">
-</head>
-<body>
-    <h1 class="title">Promedio de los niveles de inventario esperados en tienda</h1>
+    <link rel="stylesheet" href="../../css/pg-style.css" />
+  </head>
+  <body>
+    <h1 class="title">
+      Promedio de los niveles de inventario esperados en tienda
+    </h1>
 
     <div class="contenido">
-        
-          
-        <div class="grafico">
-            <h4 class="mb-3">Comparación de Predicciones vs Valores Históricos - Lote de envio 1 hasta Lote de envio 4</h4>
-            <div class="d-flex align-items-center mb-3">
-                <label for="filterCategory" class="me-2">Filtrar por Grupo:</label>
-                <select id="filterCategory" class="form-select form-select-sm w-auto">
-                  <option value="all">Todos</option>
-                </select>
-              </div>
-              <div id="graficosContainer"></div>
+      <div class="grafico">
+        <h4 class="mb-3">
+          Comparación de Predicciones vs Valores Históricos - Lote de envio 1
+          hasta Lote de envio 4
+        </h4>
+        <p class="lh-base">
+          Los gráficos muestran los resultados por categoría y año, comparando
+          las predicciones del modelo con los valores reales. Estas
+          visualizaciones permiten evaluar el desempeño del modelo al capturar
+          patrones históricos y su capacidad para predecir con precisión las
+          tendencias de cada categoría. Este análisis comparativo facilita la
+          identificación de categorías con mayor desviación y áreas donde el
+          modelo puede requerir ajustes o refinamientos.
+        </p>
+        <div class="d-flex align-items-center mb-3">
+          <label for="filterCategory" class="me-2">Filtrar por Grupo:</label>
+          <select id="filterCategory" class="form-select form-select-sm w-auto">
+            <option value="all">Todos</option>
+          </select>
         </div>
+        <div id="graficosContainer"></div>
+      </div>
 
-        <div class="grafico">
-            <h4 class="mb-3">Histórico y Predicciones 2024 - Lote de envio 1 hasta Lote de envio 4</h4>
-            <div class="d-flex align-items-center mb-3">
-                <label for="filterCategory2" class="me-2">Filtrar por Grupo:</label>
-                <select id="filterCategory2" class="form-select form-select-sm w-auto">
-                  <option value="all">Todos</option>
-                </select>
-              </div>
-              <div id="graficosContainer2"></div>
+      <div class="grafico">
+        <h4 class="mb-3">
+          Histórico y Predicciones 2024 - Lote de envio 1 hasta Lote de envio 4
+        </h4>
+        <p class="lh-base">
+          Los resultados se analizan gráficamente para evaluar la precisión del
+          modelo mediante gráficos de dispersión, que comparan las predicciones
+          con los valores reales, y gráficos de líneas, que ilustran la
+          evolución de las predicciones frente a los valores observados a lo
+          largo del tiempo. Para el año 2024, las predicciones indican un total
+          de 2945 para el lote de envío 1, 4528 para el lote de envío 2, 5193
+          para el lote de envío 3, y 3083 para el lote de envío 4. Estas
+          visualizaciones permiten interpretar tendencias y validar la capacidad
+          del modelo para ajustarse a los datos históricos, proporcionando una
+          herramienta esencial para la planificación logística.
+        </p>
+        <div class="d-flex align-items-center mb-3">
+          <label for="filterCategory2" class="me-2">Filtrar por Grupo:</label>
+          <select
+            id="filterCategory2"
+            class="form-select form-select-sm w-auto"
+          >
+            <option value="all">Todos</option>
+          </select>
         </div>
+        <div id="graficosContainer2"></div>
+      </div>
     </div>
-
-</body>
+  </body>
 </html>

@@ -13,6 +13,15 @@
 
     <div class="contenido">
       <div class="grafico">
+        <p class="lh-base">
+          Los gráficos presentan las cantidades de productos inventariados por
+          campo, ofreciendo una perspectiva detallada de cómo se distribuyen los
+          inventarios entre diferentes áreas. Estas visualizaciones permiten
+          identificar patrones específicos en la gestión de inventarios por
+          campo, resaltando posibles diferencias en los niveles de stock y
+          facilitando la planificación para mantener un equilibrio adecuado
+          entre demanda y disponibilidad.
+        </p>
         <div class="d-flex align-items-center mb-4">
           <label for="campoFilter" class="mr-2">Filtrar por Campo:</label>
           <select id="campoFilter" class="form-select w-auto"></select>
@@ -22,6 +31,15 @@
       </div>
       <div class="grafico">
         <h2>Gráficos de Hiperparámetros</h2>
+        <p class="lh-base">
+          Los gráficos ilustran el impacto de cada hiperparámetro en el
+          desempeño de los modelos utilizados. Estas visualizaciones permiten
+          analizar cómo los diferentes ajustes de parámetros influyen en la
+          precisión y eficacia del modelo, ayudando a identificar
+          configuraciones óptimas para mejorar su rendimiento. Este análisis es
+          crucial para garantizar que los modelos estén ajustados adecuadamente
+          a los datos y que maximicen su capacidad predictiva.
+        </p>
         <!-- Contenedores de los gráficos -->
         <canvas id="xgb_n_estimators" class="mb-5"></canvas>
         <canvas id="xgb_max_depth" class="mb-5"></canvas>
@@ -34,19 +52,35 @@
 
       <div class="grafico">
         <h2>Métricas de los modelos base</h2>
-        <div id="baseModelsChart" ></div>
+        <p class="lh-base"></p>
+        <div id="baseModelsChart"></div>
         <canvas id="metaModelChart"></canvas>
       </div>
       <div class="grafico">
         <h4>Valores Históricos vs Predicciones</h4>
-        <canvas id="scatterChart"></canvas>
-      </div>
-      <div class="grafico">
+        <p class="lh-base">
+          Se presentan las comparaciones entre las predicciones del modelo y los
+          valores reales por año. Estas visualizaciones permiten evaluar la
+          precisión del modelo al comparar las estimaciones futuras con los
+          datos históricos. Este análisis es crucial para identificar cualquier
+          discrepancia y para ajustar las estrategias de gestión de acuerdo a
+          las necesidades proyectadas en el tiempo.
+        </p>
+        <canvas id="scatterChart" class="mb-5"></canvas>
         <h4>Comparación de Valores Históricos y Predicciones</h4>
         <canvas id="trendChart"></canvas>
       </div>
       <div class="grafico">
         <h2>Datos Reales y Predicciones para el 2024</h2>
+        <p class="lh-base">
+          Se visualizan junto con los datos históricos en un gráfico que muestra
+          tanto los valores reales como las predicciones para el año 2024. Este
+          análisis proporciona una visión clara de cómo se espera que
+          evolucionen las cantidades a lo largo del año, basándose en los
+          patrones aprendidos por el modelo. Esto permite identificar las
+          tendencias esperadas y evaluar la precisión de las predicciones en
+          base a los datos previos.
+        </p>
         <canvas id="chart" width="800" height="400"></canvas>
       </div>
     </div>

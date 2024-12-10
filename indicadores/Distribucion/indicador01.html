@@ -1,55 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-    <title>Costo transporte</title>
-    <link rel="stylesheet" href="../../css/pg-style.css" />
-  </head>
-  <body>
-    <h1 class="title">Costo por unidad transportada</h1>
 
-    <!-- Contenedor para los gráficos -->
-    <div class="contenido">
-      <div id="categorias" class="grafico">
-        <div id="graficosContainer"></div>
-        <canvas id="divisionChart" class="w-50 h-50 m-auto"></canvas>
-      </div>
-      <div class="grafico">
-        <h2>Gráficos de Optimización</h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+  <title>Costo transporte</title>
+  <link rel="stylesheet" href="../../css/pg-style.css" />
+</head>
 
-        <canvas id="xgboost_n_estimators" class="mb-5"></canvas>
-        <canvas id="xgboost_max_depth" class="mb-5"></canvas>
-        <canvas id="xgboost_learning_rate" class="mb-5"></canvas>
-        
-        <!-- CatBoost Charts -->
-        <canvas id="catboost_iterations" class="mb-5"></canvas>
-        <canvas id="catboost_depth" class="mb-5"></canvas>
-        <canvas id="catboost_learning_rate" class="mb-5"></canvas>
-        
-        <!-- SVR Charts -->
-        <canvas id="svr_c" class="mb-5"></canvas>
-        <canvas id="svr_gamma" class="mb-5"></canvas>
-      </div>
-      <div class="grafico">
-        <h2>Gráficos de Métricas</h>
-        <div id="baseModelsContainer"></div>
-        <canvas id="metaModelChart"class="mb-5"></canvas>
-      </div>
-      <div class="grafico">
-        <h2>Gráfico de Datos Originales y Predicciones</h2>
-        <canvas id="predictionChart"></canvas>
-      </div>
-      <div id="reales-vs-predichos" class="grafico">
-        <h4>Comparación Valores Históricos vs Predicciones</h4>
-        <canvas id="scatterChart"></canvas>
-      </div>
-      <div class="grafico">
-        <h4>Comparación Valores Históricos vs Predicciones</h4>
-        <canvas id="lineChart"></canvas>
-      </div>
+<body>
+  <h1 class="title">Costo por unidad transportada</h1>
+
+  <!-- Contenedor para los gráficos -->
+  <div class="contenido">
+    <div id="categorias" class="grafico">
+      <p class="lh-base">En los gráficos se puede visualizar el promedio de productos distribuidos por cada lote de
+        envío, respectivamente. Estos gráficos permiten observar las variaciones en la distribución a lo largo del
+        tiempo y entre diferentes lotes, ayudando a analizar la eficiencia y consistencia de los procesos de
+        distribución en función de las predicciones y los datos históricos.</p>
+      <div id="graficosContainer"></div>
+      <canvas id="divisionChart" class="w-50 h-50 m-auto"></canvas>
     </div>
-  </body>
+    <div class="grafico">
+      <h2>Gráficos de Optimización</h2>
+      <p class="lh-base">Los parámetros de los modelos base se optimizan utilizando RandomizedSearchCV, lo que permite
+        encontrar las mejores combinaciones de hiperparámetros para maximizar el desempeño del modelo. Esta optimización
+        es crucial para mejorar la precisión del conjunto final al ajustar los parámetros de los modelos individuales.
+        Para más detalles sobre el impacto de los hiperparámetros en el desempeño de cada modelo, consulte los gráficos
+        correspondientes.</p>
+      <canvas id="xgboost_n_estimators" class="mb-5"></canvas>
+      <canvas id="xgboost_max_depth" class="mb-5"></canvas>
+      <canvas id="xgboost_learning_rate" class="mb-5"></canvas>
+
+      <!-- CatBoost Charts -->
+      <canvas id="catboost_iterations" class="mb-5"></canvas>
+      <canvas id="catboost_depth" class="mb-5"></canvas>
+      <canvas id="catboost_learning_rate" class="mb-5"></canvas>
+
+      <!-- SVR Charts -->
+      <canvas id="svr_c" class="mb-5"></canvas>
+      <canvas id="svr_gamma" class="mb-5"></canvas>
+    </div>
+    <div class="grafico">
+      <h2>Gráficos de Métricas</h>
+        <p class="lh-base"></p>
+        <div id="baseModelsContainer"></div>
+        <canvas id="metaModelChart" class="mb-5"></canvas>
+    </div>
+    <div id="reales-vs-predichos" class="grafico">
+      <h4>Comparación Valores Históricos vs Predicciones</h4>
+      <p class="lh-base">Se utilizan gráficos como los de dispersión y líneas para visualizar y comparar de manera
+        intuitiva los valores observados y los estimados por el modelo. Estas actividades garantizan que el modelo final
+        sea robusto, proporcionando una evaluación tanto estadística como gráfica de su desempeño.</p>
+      <canvas id="scatterChart"></canvas>
+      <h4>Comparación Valores Históricos vs Predicciones</h4>
+      <canvas id="lineChart"></canvas>
+    </div>
+    <div class="grafico">
+      <h2>Gráfico de Datos Originales y Predicciones</h2>
+      <p class="lh-base">El modelo realiza las predicciones de las cantidades para 2024, basándose en las
+        características generadas. Las predicciones obtenidas se visualizan junto con los datos históricos en un gráfico
+        que muestra tanto los valores reales como las predicciones. Esto permite una comparación visual clara de la
+        evolución esperada para el año 2024.</p>
+      <canvas id="predictionChart"></canvas>
+    </div>
+  </div>
+</body>
+
 </html>

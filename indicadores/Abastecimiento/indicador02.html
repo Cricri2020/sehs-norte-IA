@@ -13,10 +13,18 @@
     <div class="contenido">
       <div class="grafico">
         <h4>Predicciones de Costo Promedio por Lote de envío para 2024</h4>
-        <canvas id="graficoGeneral"></canvas>
-      </div>
-      <div class="grafico">
+        <p class="lh-base">
+          Se generaron predicciones relacionadas con el costo promedio por
+          categoría para el año 2024. Los gráficos correspondientes presentan
+          los resultados obtenidos, destacando las variaciones estimadas en cada
+          categoría. Estas proyecciones proporcionan información clave para
+          identificar tendencias futuras, permitiendo una planificación
+          estratégica más precisa y una gestión eficiente de los recursos según
+          las necesidades de cada categoría.
+        </p>
+        <canvas id="graficoGeneral" class="mb-5"></canvas>
         <h4>Evolución de Costos - Lote de envio 1 hasta Lote de envio 4</h4>
+        <p class="lh-base"></p>
         <div class="d-flex align-items-center mb-3">
           <label for="filterCategory" class="me-2"
             >Filtrar por Categoría:</label
@@ -28,26 +36,35 @@
         </div>
         <div id="graficosIndividuales"></div>
       </div>
-      
-
-
       <div class="grafico">
         <h4>
-          Comparación de Predicciones vs Valores Históricos - Lote de envio 1 hasta Lote de envio 4
+          Comparación de Predicciones vs Valores Históricos - Lote de envio 1
+          hasta Lote de envio 4
         </h4>
+        <p class="lh-base">
+          Los gráficos muestran los resultados obtenidos, facilitando la
+          interpretación del desempeño del modelo al comparar las predicciones
+          con los valores reales relacionados al costo promedio por categoría.
+          Estas visualizaciones permiten identificar cómo el modelo captura las
+          variaciones entre las categorías y evalúa su precisión al ajustar las
+          tendencias observadas en los datos históricos. Esto proporciona un
+          análisis detallado para apoyar la toma de decisiones en la gestión de
+          costos.
+        </p>
         <div class="d-flex align-items-center mb-3">
           <label for="filterCategory2" class="me-2"
             >Filtrar por Categoría:</label
           >
-          <select id="filterCategory2" class="form-select form-select-sm w-auto">
+          <select
+            id="filterCategory2"
+            class="form-select form-select-sm w-auto"
+          >
             <option value="all">Todas</option>
             <!-- Opciones de categorías dinámicas -->
           </select>
         </div>
         <div id="graficosContainer"></div>
       </div>
-
-      
     </div>
   </body>
 </html>

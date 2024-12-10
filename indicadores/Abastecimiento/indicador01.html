@@ -14,33 +14,78 @@
     <div class="contenido">
       <div class="grafico">
         <h4>Valores Históricos vs Predicciones de Ensemble</h4>
+        <p class="lh-base">
+          En el gráfico, se visualizan las predicciones futuras, comparando las
+          estimaciones para puntos futuros con los valores históricos
+          disponibles. Esta representación proporciona una visión clara de cómo
+          se proyecta el comportamiento de los datos en el tiempo, destacando la
+          utilidad del modelo para anticipar escenarios y planificar
+          estrategias.
+        </p>
         <canvas id="dispersionChart"></canvas>
       </div>
       <div class="grafico">
         <h4>Predicciones de Ensemble Stacking vs Valores Históricos</h4>
+        <p class="lh-base">
+          En el gráfico, se observan las predicciones frente a los valores
+          reales mediante una representación de líneas, donde el eje X
+          corresponde a los valores reales y el eje Y a las predicciones
+          generadas por el modelo. Este gráfico permite analizar la capacidad
+          del modelo para ajustarse a los datos históricos, evidenciando la
+          precisión en la predicción de tendencias y variaciones.
+        </p>
         <canvas id="prediccionesVsRealesChart"></canvas>
       </div>
       <div class="grafico">
         <h4>Predicción del Costo Total de Abastecimiento Anual</h4>
+        <p class="lh-base">
+          El gráfico muestra la predicción del Costo Total de Abastecimiento
+          Anual para el próximo año, representando la proyección de este costo a
+          lo largo de los próximos 365 días. La visualización ofrece una
+          perspectiva clara sobre la evolución esperada del valor, destacando
+          las tendencias y posibles fluctuaciones en el tiempo. Según las
+          predicciones, el costo total estimado para el año 2025 asciende a
+          S/656,251.00, proporcionando información clave para la planificación y
+          optimización del abastecimiento.
+        </p>
         <div class="d-flex align-items-center">
-          <label for="filterYearPrediccionesFuturas" class="me-2">Filtrar por Año:</label>
-          <select id="filterYearPrediccionesFuturas" class="form-select form-select-sm w-auto">
+          <label for="filterYearPrediccionesFuturas" class="me-2"
+            >Filtrar por Año:</label
+          >
+          <select
+            id="filterYearPrediccionesFuturas"
+            class="form-select form-select-sm w-auto"
+          >
             <option value="all">Todos</option>
           </select>
         </div>
-        <canvas id="prediccionesFuturasChart"></canvas>        
+        <canvas id="prediccionesFuturasChart"></canvas>
       </div>
       <div class="grafico">
         <h4>Comparación de Predicciones vs Valores Reales por Año</h4>
+        <p class="lh-base">
+          Se presentan las comparaciones entre las predicciones del modelo y los
+          valores reales por año. Los gráficos permiten evaluar el nivel de
+          precisión del modelo al representar tanto los valores predichos como
+          los observados en una misma visualización. Estas comparaciones ayudan
+          a identificar patrones y posibles discrepancias en las estimaciones,
+          mostrando cómo el modelo se ajusta a los datos históricos y destacando
+          su utilidad para proyecciones futuras en la gestión del abastecimiento
+          anual.
+        </p>
         <div class="d-flex align-items-center">
-          <label for="filterYearComparacion" class="me-2">Filtrar por Año:</label>
-          <select id="filterYearComparacion" class="form-select form-select-sm w-auto">
+          <label for="filterYearComparacion" class="me-2"
+            >Filtrar por Año:</label
+          >
+          <select
+            id="filterYearComparacion"
+            class="form-select form-select-sm w-auto"
+          >
             <option value="all">Todos</option>
           </select>
         </div>
         <canvas id="comparacionPrediccionesChart"></canvas>
       </div>
     </div>
-
   </body>
 </html>
